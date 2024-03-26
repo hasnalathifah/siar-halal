@@ -11,7 +11,7 @@ export default function ArPage() {
       <a-entity
         material='color: red'
         geometry='primitive: box'
-        gps-new-entity-place='latitude: -7.289285; longitude: 112.796703'
+        gps-new-entity-place='latitude: -7.28936; longitude: 112.80233'
         scale='10 10 10'
       ></a-entity>
     </a-scene>

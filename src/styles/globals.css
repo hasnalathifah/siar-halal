@@ -3,31 +3,348 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+  /* #region  /**=========== Primary Color =========== */
+  --tw-color-primary-50: 238 242 255;
+  --tw-color-primary-100: 224 231 255;
+  --tw-color-primary-200: 199 210 254;
+  --tw-color-primary-300: 165 180 252;
+  --tw-color-primary-400: 129 140 248;
+  --tw-color-primary-500: 99 102 241;
+  --tw-color-primary-600: 79 70 229;
+  --tw-color-primary-700: 67 56 202;
+  --tw-color-primary-800: 55 48 163;
+  --tw-color-primary-900: 49 46 129;
+  --tw-color-primary-950: 30 27 75;
+  --color-primary-50: rgb(var(--tw-color-primary-50)); /* #eef2ff */
+  --color-primary-100: rgb(var(--tw-color-primary-100)); /* #e0e7ff */
+  --color-primary-200: rgb(var(--tw-color-primary-200)); /* #c7d2fe */
+  --color-primary-300: rgb(var(--tw-color-primary-300)); /* #a5b4fc */
+  --color-primary-400: rgb(var(--tw-color-primary-400)); /* #818cf8 */
+  --color-primary-500: rgb(var(--tw-color-primary-500)); /* #6366f1 */
+  --color-primary-600: rgb(var(--tw-color-primary-600)); /* #4f46e5 */
+  --color-primary-700: rgb(var(--tw-color-primary-700)); /* #4338ca */
+  --color-primary-800: rgb(var(--tw-color-primary-800)); /* #3730a3 */
+  --color-primary-900: rgb(var(--tw-color-primary-900)); /* #312e81 */
+  --color-primary-950: rgb(var(--tw-color-primary-950)); /* #1e1b4b */
+  /* #endregion  /**======== Primary Color =========== */
+
+  /* #region  /**=========== Secondary Color =========== */
+  --tw-color-secondary-50: 250 250 250;
+  --tw-color-secondary-100: 244 244 245;
+  --tw-color-secondary-200: 228 228 231;
+  --tw-color-secondary-300: 212 212 216;
+  --tw-color-secondary-400: 161 161 170;
+  --tw-color-secondary-500: 113 113 122;
+  --tw-color-secondary-600: 82 82 91;
+  --tw-color-secondary-700: 63 63 70;
+  --tw-color-secondary-800: 39 39 42;
+  --tw-color-secondary-900: 24 24 27;
+  --tw-color-secondary-950: 9 9 11;
+  --color-secondary-50: rgb(var(--tw-color-secondary-50)); /* #fafafa */
+  --color-secondary-100: rgb(var(--tw-color-secondary-100)); /* #f4f4f5 */
+  --color-secondary-200: rgb(var(--tw-color-secondary-200)); /* #e4e4e7 */
+  --color-secondary-300: rgb(var(--tw-color-secondary-300)); /* #d4d4d8 */
+  --color-secondary-400: rgb(var(--tw-color-secondary-400)); /* #a1a1aa */
+  --color-secondary-500: rgb(var(--tw-color-secondary-500)); /* #71717a */
+  --color-secondary-600: rgb(var(--tw-color-secondary-600)); /* #52525b */
+  --color-secondary-700: rgb(var(--tw-color-secondary-700)); /* #3f3f46 */
+  --color-secondary-800: rgb(var(--tw-color-secondary-800)); /* #27272a */
+  --color-secondary-900: rgb(var(--tw-color-secondary-900)); /* #18181b */
+  --color-secondary-950: rgb(var(--tw-color-secondary-950)); /* #09090b */
+  /* #endregion  /**======== Secondary Color =========== */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+@layer base {
+  html {
+    scroll-behavior: smooth !important;
+    /* With scroll padding, the text will scroll 1 rem below the navigation bar and banner (which total height is 64px + 4rem). */
+    scroll-padding: calc(4.5rem + 3.25rem + 1rem);
   }
-}
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  @font-face {
+    font-family: 'Cal-Sans';
+    font-style: normal;
+    font-weight: 600;
+    font-display: optional;
+    src: url('/fonts/Cal-Sans/CalSans-SemiBold.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Matter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: optional;
+    src: url('/fonts/Matter/Matter-Regular.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Matter';
+    font-style: italic;
+    font-weight: 400;
+    font-display: optional;
+    src: url('/fonts/Matter/Matter-RegularItalic.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Matter';
+    font-style: normal;
+    font-weight: 500;
+    font-display: optional;
+    src: url('/fonts/Matter/Matter-Medium.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Matter';
+    font-style: italic;
+    font-weight: 500;
+    font-display: optional;
+    src: url('/fonts/Matter/Matter-MediumItalic.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Matter';
+    font-style: normal;
+    font-weight: 600;
+    font-display: optional;
+    src: url('/fonts/Matter/Matter-SemiBold.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Matter';
+    font-style: italic;
+    font-weight: 600;
+    font-display: optional;
+    src: url('/fonts/Matter/Matter-SemiBoldItalic.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Matter';
+    font-style: normal;
+    font-weight: 700;
+    font-display: optional;
+    src: url('/fonts/Matter/Matter-Bold.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Matter';
+    font-style: italic;
+    font-weight: 700;
+    font-display: optional;
+    src: url('/fonts/Matter/Matter-BoldItalic.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Matter';
+    font-style: normal;
+    font-weight: 900;
+    font-display: optional;
+    src: url('/fonts/Matter/Matter-Heavy.woff2') format('woff2');
+  }
+  @font-face {
+    font-family: 'Matter';
+    font-style: italic;
+    font-weight: 900;
+    font-display: optional;
+    src: url('/fonts/Matter/Matter-Heavy.woff2') format('woff2');
+  }
+
+  .cursor-newtab {
+    cursor: url('/images/new-tab.png') 10 10, pointer;
+  }
+
+  /* #region  /**=========== Typography =========== */
+  .j1 {
+    @apply font-heading text-5xl font-semibold;
+  }
+  .j2 {
+    @apply font-heading text-4xl font-semibold;
+  }
+  .j3 {
+    @apply font-heading text-3xl font-semibold;
+  }
+
+  h1,
+  .h1 {
+    @apply font-heading text-2xl font-semibold;
+  }
+  h2,
+  .h2 {
+    @apply font-heading text-xl font-semibold;
+  }
+  h3,
+  .h3 {
+    @apply font-heading text-lg font-semibold;
+  }
+  h4,
+  .h4 {
+    @apply font-body text-lg font-bold;
+  }
+  h5,
+  .h5 {
+    @apply font-heading text-base font-semibold;
+  }
+  h6,
+  .h6 {
+    @apply font-heading text-sm font-semibold;
+  }
+
+  .s1 {
+    @apply font-body text-lg font-medium;
+  }
+  .s2 {
+    @apply font-body text-base font-medium;
+  }
+  .s3 {
+    @apply font-body text-sm font-medium;
+  }
+
+  .b1 {
+    @apply font-body text-lg font-normal;
+  }
+  .b2 {
+    @apply font-body text-base font-normal;
+  }
+  .b3 {
+    @apply font-body text-sm font-normal;
+  }
+
+  .c1 {
+    @apply font-body text-xs font-normal;
+  }
+  .c2 {
+    @apply font-body text-[11px] font-normal leading-[14px];
+  }
+
+  body {
+    @apply font-body text-typo text-base;
+  }
+  /* #endregion  /**======== Typography =========== */
+
+  .layout {
+    /* 1100px */
+    max-width: 68.75rem;
+    @apply mx-auto w-11/12;
+  }
+
+  .bg-dark a.custom-link {
+    @apply border-gray-200 hover:border-gray-200/0;
+  }
+
+  /* Class to adjust with sticky footer */
+  .min-h-main {
+    @apply min-h-[calc(100vh-4.5rem)];
+  }
+
+  .shadow-neon {
+    filter: drop-shadow(0 0 1px rgba(199, 210, 254))
+      drop-shadow(0 0 15px rgba(99, 102, 241))
+      drop-shadow(0 0 1px rgba(165, 180, 252));
+  }
+
+  .text-purple-gradient {
+    @apply bg-gradient-to-r from-[#69EACB] via-[#EACCF8] to-[#6654F1] bg-clip-text text-transparent;
+  }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .animated-underline {
+    background-image: linear-gradient(#33333300, #33333300),
+      linear-gradient(
+        to right,
+        var(--color-primary-400),
+        var(--color-primary-500)
+      );
+    background-size: 100% 2px, 0 2px;
+    background-position: 100% 100%, 0 100%;
+    background-repeat: no-repeat;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .animated-underline {
+      transition: 0.3s ease;
+      transition-property: background-size, color, background-color,
+        border-color;
+    }
+  }
+  .animated-underline:hover,
+  .animated-underline:focus-visible {
+    background-size: 0 2px, 100% 2px;
   }
 }
+
+/* #region  /**=========== Datepicker =========== */
+.react-datepicker-wrapper {
+  display: block;
+  width: 100%;
+}
+
+.react-datepicker__navigation.react-datepicker__navigation--previous,
+.react-datepicker__navigation.react-datepicker__navigation--next {
+  top: 6px;
+}
+
+.react-datepicker__header__dropdown {
+  margin-top: 0.5rem;
+}
+
+.react-datepicker__year-select,
+.react-datepicker__month-select {
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  padding-left: 0.7rem;
+  border-radius: 1.25rem;
+}
+
+/* Selected date color */
+.react-datepicker__day--selected,
+.react-datepicker__day--in-selecting-range,
+.react-datepicker__day--in-range,
+.react-datepicker__month-text--selected,
+.react-datepicker__month-text--in-selecting-range,
+.react-datepicker__month-text--in-range,
+.react-datepicker__quarter-text--selected,
+.react-datepicker__quarter-text--in-selecting-range,
+.react-datepicker__quarter-text--in-range,
+.react-datepicker__year-text--selected,
+.react-datepicker__year-text--in-selecting-range,
+.react-datepicker__year-text--in-range,
+.react-datepicker__day--keyboard-selected,
+.react-datepicker__month-text--keyboard-selected,
+.react-datepicker__quarter-text--keyboard-selected,
+.react-datepicker__year-text--keyboard-selected {
+  @apply !bg-primary-500 !rounded-full !text-white;
+}
+/* #endregion  /**======== Datepicker =========== */
+
+/* #region  /**=========== DropzoneInput Border =========== */
+/** @see https://kovart.github.io/dashed-border-generator/ */
+.dropzone-border-dash {
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='20' ry='20' stroke='%2327272A' stroke-width='4' stroke-dasharray='10'  stroke-linecap='square'/%3e%3c/svg%3e");
+  border-radius: 1.25rem;
+}
+.dropzone-border-dash-error {
+  background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='20' ry='20' stroke='%23EF4444FF' stroke-width='4' stroke-dasharray='10' stroke-linecap='square'/%3e%3c/svg%3e");
+  border-radius: 1.25rem;
+}
+/* #endregion  /**======== DropzoneInput Border =========== */
+
+/* #region  /**=========== Scrollbar =========== */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: rgb(var(--tw-color-secondary-800));
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--tw-color-secondary-700));
+  border-radius: 6px;
+}
+/* #endregion  /**======== Scrollbar =========== */
+
+/* #region  /**=========== Custom Scrollbar =========== */
+.hidden-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.hidden-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* #endregion  /**======== Custom Scrollbar =========== */
