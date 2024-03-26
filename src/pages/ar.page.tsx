@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 export default function ArPage() {
   return (
     <a-scene
