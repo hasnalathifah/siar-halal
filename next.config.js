@@ -9,7 +9,8 @@ const nextConfig = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
-
 };
 
-export default nextConfig;
+module.exports = nextConfig;
+
+
