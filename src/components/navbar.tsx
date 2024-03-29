@@ -64,11 +64,11 @@ export function Navbar() {
       <div className="container mx-auto flex items-center justify-between">
         <Typography
           as="a"
-          href="https://www.material-tailwind.com"
+          href="siar-halal-git-ar-hasnalathifahs-projects.vercel.app"
           target="_blank"
           className="text-lg font-bold text-light-blue-700"
           placeholder={""} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}        >
-          ARHalal
+          SIARHalal
         </Typography>
         <ul
           className="ml-10 hidden items-center gap-6 lg:flex text-blue-gray-700"

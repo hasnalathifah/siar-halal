@@ -31,7 +31,7 @@ export default function ArPage() {
         gltf-model= '#location'
         animation-mixer='loop: repeat'
         gps-new-entity-place={'latitude: '+destLat+'; longitude: '+destLon}
-        scale='0.6633601288757837 0.6633601288757837 0.6633601288757837'
+        scale='1 1 1'
       ></a-entity>
 
     </a-scene>
