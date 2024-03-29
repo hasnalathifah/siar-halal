@@ -24,7 +24,7 @@ export default function ArPage() {
             ></a-asset-item> */}
             <a-asset-item
                 id="location"
-                src="./assets/location.gltf"
+                src="/assets/location.gltf"
             ></a-asset-item>
         </a-assets>
       <a-entity
