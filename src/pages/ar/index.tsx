@@ -1,11 +1,11 @@
 import * as React from 'react';
 
 export default function ArPage() {
-  // const destLat = JSON.parse(localStorage.getItem("destLat")|| '{}')
-  // const destLon = JSON.parse(localStorage.getItem("destLon")|| '{}')
+  const destLat = JSON.parse(localStorage.getItem("destLat")|| '{}')
+  const destLon = JSON.parse(localStorage.getItem("destLon")|| '{}')
 
-  const destLat = -7.289285
-  const destLon = 112.796703
+  // const destLat = -7.289285
+  // const destLon = 112.796703
 
   return (
     <a-scene
