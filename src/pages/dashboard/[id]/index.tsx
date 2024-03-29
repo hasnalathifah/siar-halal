@@ -75,8 +75,10 @@ export default function Items() {
     const seachParams = useSearchParams()
     const destLat = seachParams.get('lat')
     const destLon = seachParams.get('lon')
-    localStorage.setItem("destLat", JSON.stringify(Number(destLat)))
-    localStorage.setItem("destLon", JSON.stringify(Number(destLon)))
+    if (typeof window !== 'undefined') {
+      localStorage.setItem("destLat", JSON.stringify(Number(destLat)))
+      localStorage.setItem("destLon", JSON.stringify(Number(destLon)))
+    }
     // console.log(destLat)
     // console.log(destLon)
     const nama = seachParams.get('nama')
