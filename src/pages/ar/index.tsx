@@ -18,24 +18,16 @@ export default function ArPage() {
     >
       <a-camera gps-new-camera='gpsMinDistance: 5'></a-camera>
       <a-assets>
-            <a-asset-item
-                id="arrows"
+            {/* <a-asset-item
+                id="arrow"
                 src="assets/arrow.glb"
-            ></a-asset-item>
+            ></a-asset-item> */}
             <a-asset-item
                 id="location"
                 src="/assets/location.gltf"
             ></a-asset-item>
         </a-assets>
-        <a-entity
-          id='arrow'
-          look-at='#dest'
-          gltf-model= '#arrows'
-          animation-mixer='loop: repeat'
-          scale='0.6 0.6 0.6'
-        ></a-entity>
       <a-entity
-        id='dest'
         gltf-model= '#location'
         animation-mixer='loop: repeat'
         gps-new-entity-place={'latitude: '+destLat+'; longitude: '+destLon}

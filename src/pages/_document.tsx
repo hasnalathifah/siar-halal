@@ -14,10 +14,6 @@ export default function Document() {
           type='text/javascript'
           src='https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js'
         ></script>
-        <script
-          type='text/javascript'
-          src='script/script.js'
-        ></script>
       </Head>
       <body>
         <Main />
