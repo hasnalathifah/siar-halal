@@ -4,6 +4,7 @@ import Image from "next/image";
 import AdminNavbar from "@/components/admnavbar";
 import Map from "@/components/Map";
 import { useSearchParams } from 'next/navigation'
+import Link from "next/link";
 
 // function getlocation() {
 //     navigator.geolocation.getCurrentPosition((position) => {
@@ -89,16 +90,16 @@ export default function Items() {
                     <div className="relative grid place-items-start justify-center gap-2">
                         <input value={"Perum ITS Jl. Teknik Sipil W20"} type="text" id="disabled_standard" className="block w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " disabled />
                         <label htmlFor="disabled_standard" className="relative text-sm text-black dark:text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Lokasi asal</label>
-                        <a href="#" className=" w-full flex flex-row items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+                        <Link href="#" className=" w-full flex flex-row items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
                             {/* <Image className="object-cover rounded-none rounded-s-lg" src="/image/food2.jpg" alt="" width={150} height={150}/> */}
                             <div className="flex flex-col justify-between p-4 leading-normal">
                                 <p className="mb-2 break-words font-bold tracking-tight text-gray-900 dark:text-white">{nama}</p>
                                 <p className="mb-1 break-words  font-light text-gray-700 dark:text-gray-400">{alamat}</p>
                             </div>
-                        </a>
+                        </Link>
                         <Map/>
                         <button type="button" className=" mt-8 relative w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-8 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Mulai navigasi</button>
-                        <a href="/dashboard" type="button" className=" text-center relative w-full text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-8 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">Batalkan</a>
+                        <Link href="/dashboard" type="button" className=" text-center relative w-full text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-8 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">Batalkan</Link>
                     </div>
                     <div className="relative w-full place-items-start justify-center mt-1">
                         <div className=" mt-7 w-full">
