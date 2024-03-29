@@ -17,11 +17,21 @@ export default function ArPage() {
       renderer='antialias: true; alpha: true'
     >
       <a-camera gps-new-camera='gpsMinDistance: 5'></a-camera>
+      <a-assets>
+            {/* <a-asset-item
+                id="arrow"
+                src="assets/arrow.glb"
+            ></a-asset-item> */}
+            <a-asset-item
+                id="location"
+                src="assets/location.gltf"
+            ></a-asset-item>
+        </a-assets>
       <a-entity
-        material='color: red'
-        geometry='primitive: box'
+        gltf-model= '#location'
+        animation-mixer='loop: repeat'
         gps-new-entity-place={'latitude: '+destLat+'; longitude: '+destLon}
-        scale='10 10 10'
+        scale='0.6633601288757837 0.6633601288757837 0.6633601288757837'
       ></a-entity>
 
     </a-scene>
