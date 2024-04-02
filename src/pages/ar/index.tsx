@@ -3,10 +3,10 @@ import * as React from 'react';
 export default function ArPage() {
   let destLat, destLon
   if (typeof window !== 'undefined') {
-    window.onload = () => {
+    // window.onload = () => {
       destLat = JSON.parse(localStorage.getItem("destLat")|| '{}')
       destLon = JSON.parse(localStorage.getItem("destLon")|| '{}')
-    };
+    // };
   }
 
   // const destLat = -7.289285
