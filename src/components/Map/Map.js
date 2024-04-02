@@ -1,6 +1,6 @@
 import { MapContainer, Marker, TileLayer, Tooltip, Popup } from "react-leaflet"
 import { Polyline } from "react-leaflet"
-import "@/styles/global.css"
+import "leaflet/dist/leaflet.css"
 
 export default function MyMap() {
   const position = [-7.290091,112.797018]
