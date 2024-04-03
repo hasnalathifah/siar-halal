@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useRouter } from 'next/router'
+import { useSearchParams } from 'next/navigation';
 
 
 export default function ArPage() {
@@ -10,10 +10,9 @@ export default function ArPage() {
   //   Lat = JSON.parse(localStorage.getItem("lat")|| '{}')
   //   Lon = JSON.parse(localStorage.getItem("lon")|| '{}')
   // }
-  const router = useRouter();
-  const data = router.query;
-  destLat = data.dLat
-  destLon = data.dLon
+  const seachParams = useSearchParams()
+  destLat = seachParams.get('dLat')
+  destLon = seachParams.get('dLon')
   // const length = Lat.length
   // // if (data !== null) latlon = JSON.parse(data)
 
