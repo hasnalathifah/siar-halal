@@ -1,16 +1,26 @@
 import * as React from 'react';
+import { useRouter } from 'next/router'
+
 
 export default function ArPage() {
-  let destLat, destLon
-  if (typeof window !== 'undefined') {
-    // window.onload = () => {
-      destLat = JSON.parse(localStorage.getItem("destLat")|| '{}')
-      destLon = JSON.parse(localStorage.getItem("destLon")|| '{}')
-    // };
-  }
+  // let destLat, destLon
+  // if (typeof window !== 'undefined') {
+  //   destLat = JSON.parse(localStorage.getItem("destLat")|| '{}')
+  //   destLon = JSON.parse(localStorage.getItem("destLon")|| '{}')
+  // }
+  const router = useRouter();
+  const data = router.query;
+  const lat = data.lat
+  const lon = data.lon
+  const length = lat?.length
+  // if (data !== null) latlon = JSON.parse(data)
 
-  // const destLat = -7.289285
-  // const destLon = 112.796703
+  // console.log(lat[length-1])
+
+  const destLat = lat[length-1]
+  const destLon = lon[length-1]
+  console.log(destLat, destLon)
+
 
   return (
     <a-scene

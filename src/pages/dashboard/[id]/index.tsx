@@ -1,10 +1,10 @@
-"use client";
-
 import Image from "next/image";
 import AdminNavbar from "@/components/admnavbar";
 import Map from "@/components/Map";
 import { useSearchParams } from 'next/navigation'
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { json } from "stream/consumers";
 
 // function getlocation() {
 //     navigator.geolocation.getCurrentPosition((position) => {
@@ -13,77 +13,113 @@ import Link from "next/link";
 //     });
 // };
 
-const getDirections = async (destLat: number, destLon: number) => {
-    // let currLong = pos[0];
-    // let currLat = pos[1];
-    console.log(destLat)
-    console.log(destLon)
-    const query = new URLSearchParams({
-      key: 'e057b66d-cbe8-4c45-aa02-e0dbebbf77b8'
-    }).toString();
-
- 
-    const resp = await fetch(
-      `https://graphhopper.com/api/1/route?${query}`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            points: [
-              [
-                112.796585,-7.289299
-              ],
-              [
-                destLon, destLat
-              ]
-            ],
-            snap_preventions: [
-              'motorway',
-              'ferry',
-              'tunnel'
-            ],
-            details: ['road_class', 'surface'],
-            vehicle: 'foot',
-            locale: 'en',
-            instructions: true,
-            calc_points: true,
-            points_encoded: false
-        })
-      }
-    );
-    
-    const data = await resp.json();
-
-    console.log(data)
-    
-    // let loc = data.paths[0].points.coordinates;
-    let lat = [];
-    let lon = [];
+function setLatlon(data: any){
+    let latlon = {}
+    let lat = []
+    let lon = []
     for (let i = 0; i < data.paths[0].points.coordinates.length; i++) {
         lon [i] = data.paths[0].points.coordinates[i][0]
         lat [i] = data.paths[0].points.coordinates[i][1]
     }
     localStorage.setItem("lat", JSON.stringify(lat));
-    localStorage.setItem("lon", JSON.stringify(lon));      
-};
-
-  
+    localStorage.setItem("lon", JSON.stringify(lon)); 
+    latlon = {lat, lon}
+    return latlon
+}
 
 export default function Items() {
+    
     const seachParams = useSearchParams()
-    const destLat = seachParams.get('lat')
-    const destLon = seachParams.get('lon')
-    if (typeof window !== 'undefined') {
-      localStorage.setItem("destLat", JSON.stringify(Number(destLat)))
-      localStorage.setItem("destLon", JSON.stringify(Number(destLon)))
-    }
+    const dLat = seachParams.get('lat')
+    const dLon = seachParams.get('lon')
+
+    // if (typeof window !== 'undefined') {
+    //   localStorage.setItem("destLat", JSON.stringify(Number(destLat)))
+    //   localStorage.setItem("destLon", JSON.stringify(Number(destLon)))
+    // }
     // console.log(destLat)
     // console.log(destLon)
     const nama = seachParams.get('nama')
     const alamat = seachParams.get('alamat')
-    if (Number(destLat) != 0) getDirections(Number(destLat),Number(destLon))
+
+    // if (destLat !== null ) data = await getDirections(Number(destLat), Number(destLon))
+
+    const [resp, setResp] = useState([]);
+
+    useEffect(() => {
+        const getDirections = async () => {
+            // let currLong = pos[0];
+            // let currLat = pos[1];
+            const destLat = Number(dLat)
+            const destLon = Number(dLon)
+            const query = new URLSearchParams({
+            key: 'e057b66d-cbe8-4c45-aa02-e0dbebbf77b8'
+            }).toString();
+    
+        
+            // if (destLat !== 0 ) {
+            const resp = await fetch(
+                `https://graphhopper.com/api/1/route?${query}`,
+                {
+                    method: 'POST',
+                    headers: {
+                    'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        points: [
+                        [
+                            112.796585,-7.289299
+                        ],
+                        [
+                            destLon, destLat
+                        ]
+                        ],
+                        snap_preventions: [
+                        'motorway',
+                        'ferry',
+                        'tunnel'
+                        ],
+                        details: ['road_class', 'surface'],
+                        vehicle: 'foot',
+                        locale: 'en',
+                        instructions: true,
+                        calc_points: true,
+                        points_encoded: false
+                    })
+                }
+            
+            );
+            
+            
+            const data = await resp.json();
+            // console.log(data)
+            
+            // let loc = data.paths[0].points.coordinates;
+            // for (let i = 0; i < data.paths[0].points.coordinates.length; i++) {
+            //     lon [i] = data.paths[0].points.coordinates[i][0]
+            //     lat [i] = data.paths[0].points.coordinates[i][1]
+            // }
+            // localStorage.setItem("lat", JSON.stringify(lat));
+            // localStorage.setItem("lon", JSON.stringify(lon)); 
+
+            setResp(data)
+           
+            // }
+        };
+        if (dLat !== null )getDirections()
+    }, [dLat, dLon]);
+
+    console.log(resp)
+
+    let latlon = {}
+    let lat = []
+    let lon = []
+    if (resp.length !== 0) {
+        latlon = setLatlon(resp)
+        lat = latlon.lat
+        lon = latlon.lon
+    }
+    console.log(latlon)
     return (
         <div className=" bg-blue-gray-50">
             <AdminNavbar/>
@@ -100,7 +136,7 @@ export default function Items() {
                             </div>
                         </Link>
                         <Map/>
-                        <Link href="/ar" type="button" className=" mt-8 relative w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-8 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Mulai navigasi</Link>
+                        <Link href={{pathname: "/ar", query: latlon}} type="button" className=" mt-8 relative w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-8 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Mulai navigasi</Link>
                         <Link href="/dashboard" type="button" className=" text-center relative w-full text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-8 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">Batalkan</Link>
                     </div>
                     <div className="relative w-full place-items-start justify-center mt-1">
