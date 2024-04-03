@@ -3,22 +3,24 @@ import { useRouter } from 'next/router'
 
 
 export default function ArPage() {
-  // let destLat, destLon
-  // if (typeof window !== 'undefined') {
-  //   destLat = JSON.parse(localStorage.getItem("destLat")|| '{}')
-  //   destLon = JSON.parse(localStorage.getItem("destLon")|| '{}')
-  // }
-  const router = useRouter();
-  const data = router.query;
-  const lat = data.lat
-  const lon = data.lon
-  const length = lat?.length
-  // if (data !== null) latlon = JSON.parse(data)
+  let destLat, destLon
+  let Lat = []
+  let Lon = []
+  if (typeof window !== 'undefined') {
+    Lat = JSON.parse(localStorage.getItem("lat")|| '{}')
+    Lon = JSON.parse(localStorage.getItem("lon")|| '{}')
+  }
+  // const router = useRouter();
+  // const data = router.query;
+  // const lat = data.lat
+  // const lon = data.lon
+  const length = Lat.length
+  // // if (data !== null) latlon = JSON.parse(data)
 
-  // console.log(lat[length-1])
+  // // console.log(lat[length-1])
 
-  const destLat = lat[length-1]
-  const destLon = lon[length-1]
+  destLat = Lat[length-1]
+  destLon = Lon[length-1]
   console.log(destLat, destLon)
 
 
