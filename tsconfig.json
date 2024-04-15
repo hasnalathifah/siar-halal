@@ -16,6 +16,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/Map/Map.js", "src/components/Map/index.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/Map/Map.js", "src/components/Map/index.js", "src/components/Dropdowns/UserDropdown.js"],
   "exclude": ["node_modules"]
 }

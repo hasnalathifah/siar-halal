@@ -3,6 +3,7 @@ const withMT = require("@material-tailwind/react/utils/withMT");
 
 const config: Config = withMT({
   content: [
+    "./node_modules/flowbite-react/lib/**/*.js",
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -16,6 +17,6 @@ const config: Config = withMT({
     //   },
     // },
   },
-  plugins: [],
+  plugins: [require("flowbite/plugin")],
 });
 export default config;

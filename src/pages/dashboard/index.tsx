@@ -4,6 +4,7 @@ import { Form } from "@/components/form";
 // import Image from "next/image";
 import AdminNavbar from "@/components/admnavbar";
 import CardComp from "@/components/cardcomp";
+import Sidebar from "@/components/sidebar";
 // import Card from "@/components/card";
 // import { getResto } from "../lib/data";
 
@@ -17,8 +18,8 @@ import CardComp from "@/components/cardcomp";
 export default function Dashboard() {
     return (
         <div className=" bg-blue-gray-50">
-            {/* <Sidebar/> */}
-            <AdminNavbar/>
+            <Sidebar/>
+            {/* <AdminNavbar/> */}
             <div className="relative grid place-items-start justify-center gap-2">
                 <div className="relative grid place-items-start justify-center gap-2">
                     <Form/>

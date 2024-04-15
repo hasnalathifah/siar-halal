@@ -1,5 +1,6 @@
 import Image from "next/image";
 import AdminNavbar from "@/components/admnavbar";
+import Sidebar from "@/components/sidebar";
 import Map from "@/components/Map";
 import { useSearchParams } from 'next/navigation'
 import Link from "next/link";
@@ -122,7 +123,7 @@ export default function Items() {
     console.log(latlon)
     return (
         <div className=" bg-blue-gray-50">
-            <AdminNavbar/>
+            <Sidebar/>
             <div className="relative min-w-full mt-8 grid place-items-start justify-center gap-2 ">
                 <div className="divide-y divide-blue-gray-100">
                     <div className="relative grid place-items-start justify-center gap-2">
