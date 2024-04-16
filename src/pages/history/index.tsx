@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Sidebar from "@/components/sidebar"
 import { Typography } from "@material-tailwind/react"
+import Link from "next/link"
 
 export default function History(){
   return(
@@ -20,7 +21,7 @@ export default function History(){
                 </div>
                 <div className="mt-1">
                   <div className="mt-3">
-                  <a href="/history/review" className=" mb-1 font-light text-blue-700 hover:text-blue-200">Berikan ulasan</a>
+                  <Link href="/history/review" className=" mb-1 font-light text-blue-700 hover:text-blue-200">Berikan ulasan</Link>
                   </div>
                   
                 </div>
