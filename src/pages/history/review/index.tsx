@@ -1,6 +1,7 @@
 import { Card, CardBody, Typography } from "@material-tailwind/react";
 import Image from "next/image"
 import Sidebar from "@/components/sidebar"
+import Link from "next/link";
 
 export default function Review(){
   return(
@@ -128,7 +129,7 @@ export default function Review(){
                     <p className="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">{'SVG, PNG, JPG or GIF (MAX. 800x400px).'}</p>
                     </div>
                     <div className="flex gap-1 mt-4 mb-3 items-center">
-                      <a href="/history" type="button" className="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800  ">Kirim</a>
+                      <Link href="/history" type="button" className="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800  ">Kirim</Link>
                     </div>
                   </div>
                 </CardBody>
