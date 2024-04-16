@@ -20,7 +20,7 @@ export default function History(){
                 </div>
                 <div className="mt-1">
                   <div className="mt-3">
-                  <a href="#" className=" mb-1 font-light text-blue-700 hover:text-blue-200">Berikan ulasan</a>
+                  <a href="/history/review" className=" mb-1 font-light text-blue-700 hover:text-blue-200">Berikan ulasan</a>
                   </div>
                   
                 </div>
