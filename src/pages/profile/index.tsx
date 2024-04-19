@@ -8,9 +8,9 @@ export default function Profile(){
   return(
     <>
       <Sidebar/>
-      <div className="relative min-h-screen mt-8 grid place-items-start justify-center gap-2 ">
+      <div className="relative min-h-screen grid place-items-start justify-center gap-2 ">
         {/* <div className="divide-y divide-blue-gray-100"> */}
-          <div className="relative grid place-items-center justify-center gap-2">
+          <div className="relative grid mt-8 place-items-center justify-center gap-2">
             <div className=" mt-4 px-5 py-5 w-full flex flex-row place-items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
               <div className="">
               <h2 className="mb-4 text-xl font-bold text-gray-900 dark:text-white">Update profil</h2>

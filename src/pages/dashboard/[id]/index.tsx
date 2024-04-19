@@ -274,105 +274,105 @@ export default function Items() {
                     <div className="relative grid place-items-start justify-center  mt-1">
                         <div className=" mt-2 mb-7 w-full">
                             <div className=" relative mt-6 p-4 w-full flex flex-row items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl">
-                            <Card
-                                shadow={false}
-                                color="transparent"
-                                className="grid items-center gap-6 " placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}
-                            >
-                                <CardBody className="p-0 gap-5 flex " placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
-                                <div className=" !m-0 h-full  w-full  max-h-[40px] max-w-[40px] ">
-                                    <Image
-                                    width={768}
-                                    height={768}
-                                    src={'/image/food-bg.jpg'}
-                                    alt="img"
-                                    className="h-full rounded w-full object-cover object-center"
-                                    />
-                                </div>
-                                <div>
-                                    <div className="flex gap-1 mb-3 items-center">
-                                    <Typography
-                                        variant="small"
-                                        className=" font-bold flex items-center gap-2 !text-gray-900" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}
-                                    >
-                                        Hasna Lathifah
-                                    </Typography>
-                                    <Typography variant="small" className="font-medium !text-gray-500" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
-                                        2 hours ago
-                                    </Typography>
-                                    </div>
-                                    <div className="flex gap-1 mb-3 items-center">
-                                    <table>
-                                        <tbody>
-                                        <tr>
-                                            <th>
-                                            <Typography className="w-full font-normal !text-gray-500" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
-                                                Makanan
-                                            </Typography>
-                                            </th>
-                                            <td className="px-6">
-                                            <div className="rating">
-                                                <input disabled type="radio" name="makanan" className="mask mask-star-2 bg-orange-400" />
-                                                <input disabled type="radio" name="makanan" className="mask mask-star-2 bg-orange-400" />
-                                                <input disabled type="radio" name="makanan" className="mask mask-star-2 bg-orange-400" />
-                                                <input disabled type="radio" name="makanan" className="mask mask-star-2 bg-orange-400" checked />
-                                                <input disabled type="radio" name="makanan" className="mask mask-star-2 bg-orange-400" />
-                                            </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>
-                                            <Typography className="w-full font-normal !text-gray-500" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
-                                                Pelayanan
-                                            </Typography>
-                                            </th>
-                                            <td className="px-6">
-                                            <div className="rating">
-                                                <input disabled type="radio" name="Pelayanan" className="mask mask-star-2 bg-orange-400" />
-                                                <input disabled type="radio" name="Pelayanan" className="mask mask-star-2 bg-orange-400" />
-                                                <input disabled type="radio" name="Pelayanan" className="mask mask-star-2 bg-orange-400" />
-                                                <input disabled type="radio" name="Pelayanan" className="mask mask-star-2 bg-orange-400" />
-                                                <input disabled type="radio" name="Pelayanan" className="mask mask-star-2 bg-orange-400" checked/>
-                                            </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th>
-                                            <Typography className="w-full font-normal !text-gray-500" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
-                                                Kebersihan
-                                            </Typography>
-                                            </th>
-                                            <td className="px-6">
-                                            <div className="rating">
-                                                <input disabled type="radio" name="kebersihan" className="mask mask-star-2 bg-orange-400" />
-                                                <input disabled type="radio" name="kebersihan" className="mask mask-star-2 bg-orange-400" />
-                                                <input disabled type="radio" name="kebersihan" className="mask mask-star-2 bg-orange-400" checked />
-                                                <input disabled type="radio" name="kebersihan" className="mask mask-star-2 bg-orange-400" />
-                                                <input disabled type="radio" name="kebersihan" className="mask mask-star-2 bg-orange-400" />
-                                            </div>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                    </div>
-                                    <div className="flex gap-1 mt-8 mb-3 items-center">  
-                                    <Typography className="w-full font-normal mb-4 !text-gray-500" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                    </Typography>          
-                                    </div>
-                                    <div className="flex gap-1 items-center">              
+                                <Card
+                                    shadow={false}
+                                    color="transparent"
+                                    className="grid items-center gap-6 " placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}
+                                >
+                                    <CardBody className="p-0 gap-5 flex " placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                                    <div className=" !m-0 h-full  w-full  max-h-[40px] max-w-[40px] ">
                                         <Image
-                                        width={200}
-                                        height={200}
-                                        src={'/image/food.jpg'}
+                                        width={768}
+                                        height={768}
+                                        src={'/image/food-bg.jpg'}
                                         alt="img"
-                                        className="h-full rounded w-200 object-cover object-center"
+                                        className="h-full rounded w-full object-cover object-center"
                                         />
                                     </div>
-                                </div>
-                                </CardBody>
-                            </Card>
-                        </div>
+                                    <div>
+                                        <div className="flex gap-1 mb-3 items-center">
+                                        <Typography
+                                            variant="small"
+                                            className=" font-bold flex items-center gap-2 !text-gray-900" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}
+                                        >
+                                            Hasna Lathifah
+                                        </Typography>
+                                        <Typography variant="small" className="font-medium !text-gray-500" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                                            2 hours ago
+                                        </Typography>
+                                        </div>
+                                        <div className="flex gap-1 mb-3 items-center">
+                                        <table>
+                                            <tbody>
+                                            <tr>
+                                                <th>
+                                                <Typography className="w-full font-normal !text-gray-500" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                                                    Makanan
+                                                </Typography>
+                                                </th>
+                                                <td className="px-6">
+                                                <div className="rating">
+                                                    <input disabled type="radio" name="makanan" className="mask mask-star-2 bg-orange-400" />
+                                                    <input disabled type="radio" name="makanan" className="mask mask-star-2 bg-orange-400" />
+                                                    <input disabled type="radio" name="makanan" className="mask mask-star-2 bg-orange-400" />
+                                                    <input disabled type="radio" name="makanan" className="mask mask-star-2 bg-orange-400" checked />
+                                                    <input disabled type="radio" name="makanan" className="mask mask-star-2 bg-orange-400" />
+                                                </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                <Typography className="w-full font-normal !text-gray-500" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                                                    Pelayanan
+                                                </Typography>
+                                                </th>
+                                                <td className="px-6">
+                                                <div className="rating">
+                                                    <input disabled type="radio" name="Pelayanan" className="mask mask-star-2 bg-orange-400" />
+                                                    <input disabled type="radio" name="Pelayanan" className="mask mask-star-2 bg-orange-400" />
+                                                    <input disabled type="radio" name="Pelayanan" className="mask mask-star-2 bg-orange-400" />
+                                                    <input disabled type="radio" name="Pelayanan" className="mask mask-star-2 bg-orange-400" />
+                                                    <input disabled type="radio" name="Pelayanan" className="mask mask-star-2 bg-orange-400" checked/>
+                                                </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>
+                                                <Typography className="w-full font-normal !text-gray-500" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                                                    Kebersihan
+                                                </Typography>
+                                                </th>
+                                                <td className="px-6">
+                                                <div className="rating">
+                                                    <input disabled type="radio" name="kebersihan" className="mask mask-star-2 bg-orange-400" />
+                                                    <input disabled type="radio" name="kebersihan" className="mask mask-star-2 bg-orange-400" />
+                                                    <input disabled type="radio" name="kebersihan" className="mask mask-star-2 bg-orange-400" checked />
+                                                    <input disabled type="radio" name="kebersihan" className="mask mask-star-2 bg-orange-400" />
+                                                    <input disabled type="radio" name="kebersihan" className="mask mask-star-2 bg-orange-400" />
+                                                </div>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        </div>
+                                        <div className="flex gap-1 mt-8 mb-3 items-center">  
+                                        <Typography className="w-full font-normal mb-4 !text-gray-500" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                        </Typography>          
+                                        </div>
+                                        <div className="flex gap-1 items-center">              
+                                            <Image
+                                            width={200}
+                                            height={200}
+                                            src={'/image/food.jpg'}
+                                            alt="img"
+                                            className="h-full rounded w-200 object-cover object-center"
+                                            />
+                                        </div>
+                                    </div>
+                                    </CardBody>
+                                </Card>
+                            </div>
 
                         </div>
                     </div>
