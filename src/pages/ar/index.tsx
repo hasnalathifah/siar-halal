@@ -31,24 +31,12 @@ export default function ArPage() {
     <a-assets><a-asset-item id="arrow" src="assets/arrow.glb"></a-asset-item><a-asset-item id="location" src="/assets/location.gltf"></a-asset-item>
     </a-assets>
   )
-  ent.push(
-    <script>
-	      AFRAME.registerComponent('look-at', {
-	        schema: { type: 'selector' },
-	      
-	        init: function () {},
-	      
-	        tick: function () {
-	          this.el.object3D.lookAt(this.data.object3D.position)
-	        }
-	      })
-    </script>
-  )
   // let scene = document.querySelector('a-scene');
   let lat = latlon.lat;
   let lon = latlon.lon;
   console.log(lat);
   console.log(lon);
+  
 
   for (let i = lat.length-1; i > -1; i--) {
       let latitude = lat[i];
@@ -67,8 +55,8 @@ export default function ArPage() {
       }
        
       ent.push(
-        <a-entity gps-new-entity-place={'latitude: '+latitude+'; longitude: '+longitude} id = {id} look-at = {target} gltf-model = {model} animation-mixer = 'loop: repeat' scale={1 ,1 ,1}
-        ></a-entity>
+        // <a-entity gps-new-entity-place={'latitude:' +latitude '; longitude: '+longitude} look-at={target} id={id} gltf-model={model} animation-mixer='loop-repeat' scale={1 1 1}
+        // ></a-entity>
       )
       // let model = document.createElement('a-entity');
       // model.setAttribute('gps-new-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
