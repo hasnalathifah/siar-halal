@@ -3,7 +3,7 @@ import { useSearchParams } from 'next/navigation';
 
 
 export default function ArPage() {
-  let destLat, destLon
+  let destLat, destLon, Lat, Lon
   // let Lat = []
   // let Lon = []
   // if (typeof window !== 'undefined') {
@@ -13,6 +13,8 @@ export default function ArPage() {
   const seachParams = useSearchParams()
   destLat = seachParams.get('dLat')
   destLon = seachParams.get('dLon')
+  Lat = seachParams.get('lat')
+  Lon = seachParams.get('lon')
   // const length = Lat.length
   // // if (data !== null) latlon = JSON.parse(data)
 
