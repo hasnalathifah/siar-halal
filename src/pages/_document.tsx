@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-sync-scripts */
 import { Head, Html, Main, NextScript } from 'next/document';
+import {lookAt} from '@/components/LookAt/look-at'
 
 export default function Document() {
   return (
@@ -14,6 +15,7 @@ export default function Document() {
           type='text/javascript'
           src='https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js'
         ></script>
+        <script type='text/javascript' src='script/look-at.js'></script>
       </Head>
       <body>
         <Main />
