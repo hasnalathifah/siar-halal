@@ -2,6 +2,14 @@ import * as React from 'react';
 import { useSearchParams } from 'next/navigation';
 // import {lookAt} from '@/pages/ar/component/look-at';
 
+type ent = {
+  lat: string,
+  lon: string,
+  id: string,
+  look_at: string,
+  model: string
+}
+
 export default function ArPage() {
   let get, latlon
   let destLat, destLon
@@ -23,14 +31,7 @@ export default function ArPage() {
   destLon = 102.0
   console.log(latlon)
 
-  let ent = []
-  ent.push(
-    <a-camera gps-new-camera='gpsMinDistance: 5'></a-camera>
-  )
-  ent.push( 
-    <a-assets><a-asset-item id="arrow" src="assets/arrow.glb"></a-asset-item><a-asset-item id="location" src="/assets/location.gltf"></a-asset-item>
-    </a-assets>
-  )
+  let ent_: ent[] = []
   // let scene = document.querySelector('a-scene');
   let lat = latlon.lat;
   let lon = latlon.lon;
@@ -54,9 +55,14 @@ export default function ArPage() {
         model = '#location'
       }
        
-      ent.push(
-        // <a-entity gps-new-entity-place={'latitude:' +latitude '; longitude: '+longitude} look-at={target} id={id} gltf-model={model} animation-mixer='loop-repeat' scale={1 1 1}
-        // ></a-entity>
+      ent_.push(
+        {
+          lat: latitude,
+          lon: longitude,
+          id: id,
+          look_at: target,
+          model: model
+        }
       )
       // let model = document.createElement('a-entity');
       // model.setAttribute('gps-new-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
@@ -88,7 +94,25 @@ export default function ArPage() {
       vr-mode-ui='enabled: false' 
       arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false' 
       renderer='antialias: true; alpha: true'>
-      {ent}
+        <a-camera gps-new-camera='gpsMinDistance: 5'></a-camera>
+        <a-assets>
+          <a-asset-item id="arrow" src="assets/arrow.glb"></a-asset-item><a-asset-item id="location" src="/assets/location.gltf"></a-asset-item>
+        </a-assets>
+
+      {ent_.map(ent => (
+        <li key={ent.id}>
+          <a-entity 
+          gps-new-entity-place={'latitude:'+ent.lat+'; longitude:'+ent.lon} 
+          id={ent.id} 
+          look-at={ent.look_at} 
+          gltf-model={ent.model} 
+          animation-mixer='loop-repeat'
+          scale={1 1 1}
+          >
+
+          </a-entity>
+        </li>
+      ))}
            
 	  </a-scene>
   );
