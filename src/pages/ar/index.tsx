@@ -7,7 +7,8 @@ type ent = {
   lon: string,
   id: string,
   look_at: string,
-  model: string
+  model: string,
+  scale: any
 }
 
 export default function ArPage() {
@@ -61,7 +62,8 @@ export default function ArPage() {
           lon: longitude,
           id: id,
           look_at: target,
-          model: model
+          model: model,
+          scale: '1 1 1'
         }
       )
       // let model = document.createElement('a-entity');
@@ -101,14 +103,7 @@ export default function ArPage() {
 
       {ent_.map(ent => (
         <li key={ent.id}>
-          <a-entity 
-          gps-new-entity-place={'latitude:'+ent.lat+'; longitude:'+ent.lon} 
-          id={ent.id} 
-          look-at={ent.look_at} 
-          gltf-model={ent.model} 
-          animation-mixer='loop-repeat'
-          scale={1 1 1}
-          >
+          <a-entity gps-new-entity-place={'latitude:'+ent.lat+'; longitude:'+ent.lon} id={ent.id} look-at={ent.look_at} gltf-model={ent.model} animation-mixer='loop-repeat' scale={ent.scale}>
 
           </a-entity>
         </li>
