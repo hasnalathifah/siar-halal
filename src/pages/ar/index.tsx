@@ -1,12 +1,9 @@
 import * as React from 'react';
 import { useSearchParams } from 'next/navigation';
 // import {lookAt} from '@/pages/ar/component/look-at';
-{/* 
-// @ts-ignore */}
-<Foo id="fooDoesNotHaveIdType" /> 
 
 export default function ArPage() {
-  let get, latlon, str
+  let get, latlon
   let destLat, destLon
   // let Lat = []
   // let Lon = []
@@ -34,6 +31,19 @@ export default function ArPage() {
     <a-assets><a-asset-item id="arrow" src="assets/arrow.glb"></a-asset-item><a-asset-item id="location" src="/assets/location.gltf"></a-asset-item>
     </a-assets>
   )
+  ent.push(
+    <script>
+	      AFRAME.registerComponent('look-at', {
+	        schema: { type: 'selector' },
+	      
+	        init: function () {},
+	      
+	        tick: function () {
+	          this.el.object3D.lookAt(this.data.object3D.position)
+	        }
+	      })
+    </script>
+  )
   // let scene = document.querySelector('a-scene');
   let lat = latlon.lat;
   let lon = latlon.lon;
@@ -57,10 +67,8 @@ export default function ArPage() {
       }
        
       ent.push(
-        <a-entity gps-new-entity-place={'latitude: '+latitude+'; longitude: '+longitude} id = {id} look-at = {target} gltf-model = {model} animation-mixer = 'loop: repeat' scale = {1 1 1}
-        >
-
-        </a-entity>
+        <a-entity gps-new-entity-place={'latitude: '+latitude+'; longitude: '+longitude} id = {id} look-at = {target} gltf-model = {model} animation-mixer = 'loop: repeat' scale={1 ,1 ,1}
+        ></a-entity>
       )
       // let model = document.createElement('a-entity');
       // model.setAttribute('gps-new-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
@@ -84,7 +92,7 @@ export default function ArPage() {
       //     window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
       // });
       // scene.appendChild(model);
-  }
+  };
 
 
   return (
