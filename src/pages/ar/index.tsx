@@ -23,6 +23,7 @@ export default function ArPage() {
   // destLat = Lat[length-1]
   // destLon = Lon[length-1]
   console.log(destLat, destLon)
+  console.log(Lat, Lon)
 
 
   return (
