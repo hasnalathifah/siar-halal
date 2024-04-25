@@ -43,12 +43,7 @@ export default function ArPage() {
   console.log(lat);
   console.log(lon);
   
-  list.push(
-    <a-camera gps-new-camera='gpsMinDistance: 5'></a-camera>
-        <a-assets>
-          <a-asset-item id="arrow" src="assets/arrow.glb"></a-asset-item><a-asset-item id="location" src="/assets/location.gltf"></a-asset-item>
-        </a-assets>
-  )
+ 
 
   for (let i = lat.length-1; i > -1; i--) {
       let latitude = lat[i];
@@ -101,6 +96,10 @@ export default function ArPage() {
       vr-mode-ui='enabled: false' 
       arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false' 
       renderer='antialias: true; alpha: true'>
+        <a-camera gps-new-camera='gpsMinDistance: 5'></a-camera>
+        <a-assets>
+          <a-asset-item id="arrow" src="assets/arrow.glb"></a-asset-item><a-asset-item id="location" src="/assets/location.gltf"></a-asset-item>
+        </a-assets>
       {list} 
 	  </a-scene>
   );
