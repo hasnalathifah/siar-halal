@@ -13,7 +13,7 @@ type ent = {
 
 export default function ArPage() {
   let get, latlon
-  let destLat, destLon
+  let lat,lon
   // let Lat = []
   // let Lon = []
   // if (typeof window !== 'undefined') {
@@ -28,14 +28,14 @@ export default function ArPage() {
 
   // // console.log(lat[length-1])
 
-  destLat = -7.0
-  destLon = 102.0
+  lat = -7.0
+  lon = 102.0
   console.log(latlon)
 
   let ent_: ent[] = []
   // let scene = document.querySelector('a-scene');
-  let lat = latlon.lat;
-  let lon = latlon.lon;
+  lat = latlon.lat;
+  lon = latlon.lon;
   console.log(lat);
   console.log(lon);
   
