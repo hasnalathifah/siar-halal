@@ -3,8 +3,8 @@ import { useSearchParams } from 'next/navigation';
 // import {lookAt} from '@/pages/ar/component/look-at';
 
 type ent = {
-  lat: string,
-  lon: string,
+  lat: any,
+  lon: any,
   id: string,
   look_at: string,
   model: string,
