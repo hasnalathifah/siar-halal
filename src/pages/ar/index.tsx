@@ -33,7 +33,7 @@ export default function ArPage() {
   lon = 102.0
   console.log(latlon)
 
-  let ent_: ent[] = []
+  let list = []
   // let scene = document.querySelector('a-scene');
   if(latlon != null){
     lat = latlon.lat;
@@ -43,6 +43,12 @@ export default function ArPage() {
   console.log(lat);
   console.log(lon);
   
+  list.push(
+    <a-camera gps-new-camera='gpsMinDistance: 5'></a-camera>
+        <a-assets>
+          <a-asset-item id="arrow" src="assets/arrow.glb"></a-asset-item><a-asset-item id="location" src="/assets/location.gltf"></a-asset-item>
+        </a-assets>
+  )
 
   for (let i = lat.length-1; i > -1; i--) {
       let latitude = lat[i];
@@ -59,16 +65,11 @@ export default function ArPage() {
         target = '[gps-new-camera]'
         model = '#location'
       }
+      let scale = '1 1 1'
        
-      ent_.push(
-        {
-          lat: latitude,
-          lon: longitude,
-          id: id,
-          look_at: target,
-          model: model,
-          scale: '1 1 1'
-        }
+      list.push(
+        <a-entity gps-new-entity-place={'latitude:'+latitude+'; longitude:'+longitude} id={id} look-at={target} gltf-model={model} animation-mixer='loop-repeat' scale={scale}>
+          </a-entity>
       )
       // let model = document.createElement('a-entity');
       // model.setAttribute('gps-new-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
@@ -100,19 +101,7 @@ export default function ArPage() {
       vr-mode-ui='enabled: false' 
       arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false' 
       renderer='antialias: true; alpha: true'>
-        <a-camera gps-new-camera='gpsMinDistance: 5'></a-camera>
-        <a-assets>
-          <a-asset-item id="arrow" src="assets/arrow.glb"></a-asset-item><a-asset-item id="location" src="/assets/location.gltf"></a-asset-item>
-        </a-assets>
-
-      {ent_.map(ent => (
-        <li key={ent.id}>
-          <a-entity gps-new-entity-place={'latitude:'+ent.lat+'; longitude:'+ent.lon} id={ent.id} look-at={ent.look_at} gltf-model={ent.model} animation-mixer='loop-repeat' scale={ent.scale}>
-
-          </a-entity>
-        </li>
-      ))}
-           
+      {list} 
 	  </a-scene>
   );
 }
