@@ -113,7 +113,7 @@ export default function Items() {
         if (dLat !== null )getDirections()
     }, [dLat, dLon]);
 
-    console.log(resp)
+    // console.log(resp)
 
     let latlon = {}
     let lat = []
@@ -124,6 +124,20 @@ export default function Items() {
         lon = latlon.lon
     }
     const str = JSON.stringify(latlon)
+    let arButton = []
+    if (resp.length!=0){
+        arButton.push(
+            <Link href={{pathname: "/ar", query: {str}}} type="button" className=" text-center mt-8 relative w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-8 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Mulai navigasi</Link>
+        )
+        // console.log(resp)
+    }
+    else{
+        arButton.push(
+            <button className=" text-center mt-8 relative w-full text-white bg-blue-100 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-8 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Mulai navigasi</button>
+        )
+    }
+
+    
     return (
         <div className=" bg-blue-gray-50">
             <Sidebar/>
@@ -140,7 +154,7 @@ export default function Items() {
                             </div>
                         </Link>
                         <Map/>
-                        <Link href={{pathname: "/ar", query: {str}}} type="button" className=" text-center mt-8 relative w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-8 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Mulai navigasi</Link>
+                        {arButton}
                         <Link href="/dashboard" type="button" className=" text-center relative w-full text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-8 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">Batalkan</Link>
                     </div>
                     <div className="relative grid place-items-start justify-center  mt-1">
