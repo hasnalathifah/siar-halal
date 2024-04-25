@@ -35,8 +35,11 @@ export default function ArPage() {
 
   let ent_: ent[] = []
   // let scene = document.querySelector('a-scene');
-  lat = latlon.lat;
-  lon = latlon.lon;
+  if(latlon != null){
+    lat = latlon.lat;
+    lon = latlon.lon;
+  }
+  
   console.log(lat);
   console.log(lon);
   
