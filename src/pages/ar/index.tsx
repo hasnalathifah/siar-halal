@@ -14,6 +14,7 @@ type ent = {
 export default function ArPage() {
   let get, latlon
   let lat,lon
+  // let latitude, longitude, id, target, model
   // let Lat = []
   // let Lon = []
   // if (typeof window !== 'undefined') {
@@ -40,55 +41,55 @@ export default function ArPage() {
   console.log(lon);
   
 
-  for (let i = lat.length-1; i > -1; i--) {
-      let latitude = lat[i];
-      let longitude = lon[i];
-      console.log(latitude);
-      console.log(longitude);
-      let id = 'target'+i
-      let target, model 
-      if (i != lat.length-1) {
-        target = '#target'+(i+1)
-        model = '#arrow'
-      }
-      else {
-        target = '[gps-new-camera]'
-        model = '#location'
-      }
+  // for (let i = lat.length-1; i > -1; i--) {
+  //     let latitude = lat[i];
+  //     let longitude = lon[i];
+  //     console.log(latitude);
+  //     console.log(longitude);
+  //     let id = 'target'+i
+  //     let target, model 
+  //     if (i != lat.length-1) {
+  //       target = '#target'+(i+1)
+  //       model = '#arrow'
+  //     }
+  //     else {
+  //       target = '[gps-new-camera]'
+  //       model = '#location'
+  //     }
        
-      ent_.push(
-        {
-          lat: latitude,
-          lon: longitude,
-          id: id,
-          look_at: target,
-          model: model,
-          scale: '1 1 1'
-        }
-      )
-      // let model = document.createElement('a-entity');
-      // model.setAttribute('gps-new-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
-      // // model.setAttribute('material', { color: 'blue' } );
-      // model.setAttribute('look-at', '[gps-new-camera]');
-      // let id = 'target'+i;
-      // let target = '#target'+(i+1);
-      // model.setAttribute('id', id);
-      // if (i != lat.length-1) {
-      //     model.setAttribute('look-at', target);
-      //     console.log(id);
-      //     console.log(target);
-      //     model.setAttribute('gltf-model', '#arrow');
-      // } 
-      // else{
-      //     model.setAttribute('gltf-model', '#location');
-      // }
-      // model.setAttribute('animation-mixer', 'loop: repeat');
-      // model.setAttribute('scale', '0.6633601288757837 0.6633601288757837 0.6633601288757837');
-      // model.addEventListener('loaded', () => {
-      //     window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
-      // });
-      // scene.appendChild(model);
-  };
+  //     ent_.push(
+  //       {
+  //         lat: latitude,
+  //         lon: longitude,
+  //         id: id,
+  //         look_at: target,
+  //         model: model,
+  //         scale: '1 1 1'
+  //       }
+  //     )
+  //     // let model = document.createElement('a-entity');
+  //     // model.setAttribute('gps-new-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
+  //     // // model.setAttribute('material', { color: 'blue' } );
+  //     // model.setAttribute('look-at', '[gps-new-camera]');
+  //     // let id = 'target'+i;
+  //     // let target = '#target'+(i+1);
+  //     // model.setAttribute('id', id);
+  //     // if (i != lat.length-1) {
+  //     //     model.setAttribute('look-at', target);
+  //     //     console.log(id);
+  //     //     console.log(target);
+  //     //     model.setAttribute('gltf-model', '#arrow');
+  //     // } 
+  //     // else{
+  //     //     model.setAttribute('gltf-model', '#location');
+  //     // }
+  //     // model.setAttribute('animation-mixer', 'loop: repeat');
+  //     // model.setAttribute('scale', '0.6633601288757837 0.6633601288757837 0.6633601288757837');
+  //     // model.addEventListener('loaded', () => {
+  //     //     window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
+  //     // });
+  //     // scene.appendChild(model);
+  // };
 
 
   return (
@@ -101,13 +102,13 @@ export default function ArPage() {
           <a-asset-item id="arrow" src="assets/arrow.glb"></a-asset-item><a-asset-item id="location" src="/assets/location.gltf"></a-asset-item>
         </a-assets>
 
-      {ent_.map(ent => (
+      {/* {ent_.map(ent => (
         <li key={ent.id}>
           <a-entity gps-new-entity-place={'latitude:'+ent.lat+'; longitude:'+ent.lon} id={ent.id} look-at={ent.look_at} gltf-model={ent.model} animation-mixer='loop-repeat' scale={ent.scale}>
 
           </a-entity>
         </li>
-      ))}
+      ))} */}
            
 	  </a-scene>
   );
