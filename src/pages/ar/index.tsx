@@ -98,7 +98,8 @@ export default function ArPage() {
       renderer='antialias: true; alpha: true'>
         <a-camera gps-new-camera='gpsMinDistance: 5'></a-camera>
         <a-assets>
-          <a-asset-item id="arrow" src="assets/arrow.glb"></a-asset-item><a-asset-item id="location" src="/assets/location.gltf"></a-asset-item>
+          <a-asset-item id="arrow" src="assets/panah.glb"></a-asset-item>
+          <a-asset-item id="location" src="/assets/location.gltf"></a-asset-item>
         </a-assets>
       {list} 
 	  </a-scene>
