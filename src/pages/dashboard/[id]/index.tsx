@@ -10,12 +10,6 @@ import { Typography } from "@material-tailwind/react";
 import { Card, CardBody } from "@material-tailwind/react";
 import { stringify } from "querystring";
 
-// function getlocation() {
-//     navigator.geolocation.getCurrentPosition((position) => {
-//         let pos = [position.coords.longitude,position.coords.latitude]
-//         getDirections(pos);
-//     });
-// };
 
 function setLatlon(data: any){
     let latlon = {}
@@ -36,11 +30,7 @@ export default function Items() {
     const seachParams = useSearchParams()
     const dLat = seachParams.get('lat')
     const dLon = seachParams.get('lon')
-
-    // if (typeof window !== 'undefined') {
-    //   localStorage.setItem("destLat", JSON.stringify(Number(destLat)))
-    //   localStorage.setItem("destLon", JSON.stringify(Number(destLon)))
-    // }
+    // let srclat, srclon
     // console.log(destLat)
     // console.log(destLon)
     const nama = seachParams.get('nama')
@@ -49,6 +39,23 @@ export default function Items() {
     // if (destLat !== null ) data = await getDirections(Number(destLat), Number(destLon))
 
     const [resp, setResp] = useState([]);
+    const [latitude, setLatitude] = useState();
+    const [longitude, setLongitude] = useState();
+
+    useEffect(() => {
+        if('geolocation' in navigator) {
+            // Retrieve latitude & longitude coordinates from `navigator.geolocation` Web API
+            navigator.geolocation.getCurrentPosition(({ coords }) => {
+                const lat = coords.latitude;
+                const lon = coords.longitude
+                setLatitude(lat);
+                setLongitude(lon)
+            })
+        }
+    }, []);
+
+    // srclat = location.latitude
+    // srclon = location.longitude
 
     useEffect(() => {
         const getDirections = async () => {
@@ -56,10 +63,14 @@ export default function Items() {
             // let currLat = pos[1];
             const destLat = Number(dLat)
             const destLon = Number(dLon)
+            // @ts-ignore: Unreachable code error
+            const srcLat = Number(latitude)
+            const srcLon = Number(longitude)
             const query = new URLSearchParams({
             key: 'e057b66d-cbe8-4c45-aa02-e0dbebbf77b8'
             }).toString();
-    
+            console.log(srcLat)
+            console.log(srcLon)
         
             // if (destLat !== 0 ) {
             const resp = await fetch(
@@ -72,7 +83,7 @@ export default function Items() {
                     body: JSON.stringify({
                         points: [
                         [
-                            112.796585,-7.289299
+                            srcLon,srcLat
                         ],
                         [
                             destLon, destLat
@@ -110,18 +121,22 @@ export default function Items() {
            
             // }
         };
-        if (dLat !== null )getDirections()
-    }, [dLat, dLon]);
+        if (dLat !== null && latitude !== undefined)getDirections()
+    }, [dLat, dLon, latitude, longitude]);
 
     // console.log(resp)
 
     let latlon = {}
+    let map = []
     let lat = []
     let lon = []
     if (resp.length !== 0) {
         latlon = setLatlon(resp)
         lat = latlon.lat
         lon = latlon.lon
+        map.push(
+            <Map lat={lat} lon={lon}/>
+        )
     }
     const str = JSON.stringify(latlon)
     let arButton = []
@@ -153,7 +168,7 @@ export default function Items() {
                                 <p className="mb-1 break-words  font-light text-gray-700 dark:text-gray-400">{alamat}</p>
                             </div>
                         </Link>
-                        <Map/>
+                        {map}
                         {arButton}
                         <Link href="/dashboard" type="button" className=" text-center relative w-full text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-8 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">Batalkan</Link>
                     </div>

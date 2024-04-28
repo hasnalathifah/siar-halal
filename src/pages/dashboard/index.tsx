@@ -5,6 +5,8 @@ import { Form } from "@/components/form";
 import AdminNavbar from "@/components/admnavbar";
 import CardComp from "@/components/cardcomp";
 import Sidebar from "@/components/sidebar";
+import { Input, Button } from "@material-tailwind/react";
+import { useEffect, useState } from "react";
 // import Card from "@/components/card";
 // import { getResto } from "../lib/data";
 
@@ -16,13 +18,31 @@ import Sidebar from "@/components/sidebar";
 // }
 
 export default function Dashboard() {
+
     return (
         <div className=" bg-blue-gray-50">
             <Sidebar/>
             {/* <AdminNavbar/> */}
             <div className="relative grid place-items-start justify-center gap-2">
                 <div className="relative grid place-items-start justify-center gap-2">
-                    <Form/>
+                <div className="relative mt-8 flex flex-col items-center justify-center gap-4 min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-white border-0">
+                    <div className="rounded-t bg-white mb-0 px-6 py-6">
+                    <h6 className="text-blueGray-700 text-xl font-bold">Selamat Datang!</h6>
+                    <div className="mt-8 flex flex-col items-center justify-center gap-4 md:flex-row">
+                        <div className="w-80">
+                            {/* @ts-ignore */}
+                            <Input 
+                            label="Lokasi anda saat ini" 
+                            placeholder="Lokasi saat ini"
+                            // value={"Perum ITS Jl. Teknik Sipil W20"} 
+                            />
+                        </div>
+                        <Button placeholder={"Pilih lokasi"} size="md" className="lg:w-max shrink-0" fullWidth color="blue" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                        Pilih lokasi
+                        </Button>
+                    </div>
+                    </div>
+                </div>
                     <form className="w-full">   
                         <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                         <div className="relative">
