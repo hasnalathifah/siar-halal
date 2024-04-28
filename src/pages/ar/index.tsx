@@ -52,20 +52,28 @@ export default function ArPage() {
       console.log(longitude);
       let id = 'target'+i
       let target, model 
+      let scale = '1 1 1'
       if (i != lat.length-1) {
         target = '#target'+(i+1)
         model = '#arrow'
+        list.push(
+          <a-entity gps-new-entity-place={'latitude:'+latitude+'; longitude:'+longitude} id={id} look-at={target} gltf-model={model} animation-mixer='loop-repeat' scale={scale}>
+            </a-entity>
+        )
       }
       else {
         target = '[gps-new-camera]'
         model = '#location'
-      }
-      let scale = '1 1 1'
-       
-      list.push(
-        <a-entity gps-new-entity-place={'latitude:'+latitude+'; longitude:'+longitude} id={id} look-at={target} gltf-model={model} animation-mixer='loop-repeat' scale={scale}>
+        list.push(
+          <a-entity gps-new-entity-place={'latitude:'+latitude+'; longitude:'+longitude} id={id} look-at={target} gltf-model={model} animation-mixer='loop-repeat' scale={scale}>
+            <a-entity material='color: red' geometry='primitive: box' look-at={target} animation-mixer='loop-repeat' scale={scale}>
+            </a-entity>
           </a-entity>
-      )
+        )
+      }
+      
+       
+      
       // let model = document.createElement('a-entity');
       // model.setAttribute('gps-new-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
       // // model.setAttribute('material', { color: 'blue' } );
@@ -98,7 +106,7 @@ export default function ArPage() {
       renderer='antialias: true; alpha: true'>
         <a-camera gps-new-camera='gpsMinDistance: 5'></a-camera>
         <a-assets>
-          <a-asset-item id="arrow" src="assets/panah.glb"></a-asset-item>
+          <a-asset-item id="arrow" src="assets/direction.glb"></a-asset-item>
           <a-asset-item id="location" src="/assets/location.gltf"></a-asset-item>
         </a-assets>
       {list} 

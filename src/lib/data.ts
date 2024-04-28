@@ -31,7 +31,14 @@ export const resto =[
         alamat: "Jl. Teknik Arsitektur, Keputih, Sukolilo, Surabaya",
         lat:-7.287635,
         lon: 112.793887
-    }
+    },
+    {
+      id_resto: 5,
+      nama_resto: "Testing",
+      alamat: "Jl. Teknik Sipil, Keputih, Sukolilo, Surabaya",
+      lat: -7.289235,
+      lon: 112.796570
+  }
 ]
 
 

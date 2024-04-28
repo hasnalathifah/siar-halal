@@ -16,6 +16,9 @@ import Sidebarowner from "@/components/sidebarowner";
 // }
 
 export default function Dashboard() {
+  const url = 'https://example.com/posts?page=5&sort=desc#hash';
+  const urlObj = new URL(url);
+  console.log(urlObj.search); // ?page=5&sort=desc
     return (
       <>
         <Sidebarowner/>
