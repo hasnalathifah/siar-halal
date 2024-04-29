@@ -88,7 +88,7 @@ export default function ArPage() {
           </a-entity>
         )
         nav.push(
-          <a-entity gps-new-entity-place={"latitude:"+currlat+" ; longitude:"+currlon} position='0 30 0' look-at={id} gltf-model={'#panah'} animation-mixer='loop-repeat' scale={'0.5 0.5 0.5'}>
+      <a-entity gps-new-entity-place={"latitude:-7.289226 ; longitude:-112.797000"} position='0 30 0' look-at={id} gltf-model={'#panah'} animation-mixer='loop-repeat' scale={'0.5 0.5 0.5'}>
           </a-entity>
         )
       }
