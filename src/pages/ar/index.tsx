@@ -85,9 +85,8 @@ export default function ArPage() {
         const position = "0 0 0"
         list.push(
           <a-entity gps-new-entity-place={'latitude:'+latitude+'; longitude:'+longitude} id={id} look-at={target} gltf-model={model} animation-mixer='loop-repeat' scale={scale}>
-            {/* <a-entity look-at={target} gltf-model={'#finish'}  animation-mixer='loop-repeat' scale={scale}>
-            </a-entity> */}
-            <button>button</button>
+            <a-entity look-at={target} gltf-model={'#finish'}  animation-mixer='loop-repeat' scale={scale}>
+            </a-entity>
           </a-entity>
         )
         console.log(id)
@@ -119,9 +118,10 @@ export default function ArPage() {
       // scene.appendChild(model);
   };
   nav.push(
-    <a-entity gps-new-entity-place={"latitude:"+currlat+" ; longitude:"+currlon} position='0 0 5' id="nav" look-at={'#target'+idloc} gltf-model={'#panah'} animation-mixer='loop-repeat' scale={'0.3 0.3 0.3'}>
+    <a-entity gps-new-entity-place={"latitude:"+currlat+" ; longitude:"+currlon} position='0 0 30' id="nav" look-at={'#target'+idloc} gltf-model={'#panah'} animation-mixer='loop-repeat' scale={'0.3 0.3 0.3'}>
         </a-entity>
       )
+
 
 
   return (
