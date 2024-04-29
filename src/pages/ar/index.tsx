@@ -32,20 +32,20 @@ export default function ArPage() {
 
   // // console.log(lat[length-1])
 
-  // const [currlat, setCurrlat] = useState();
-  //   const [currlon, setCurrlon] = useState();
+  const [currlat, setCurrlat] = useState();
+    const [currlon, setCurrlon] = useState();
 
-  //   useEffect(() => {
-  //       if('geolocation' in navigator) {
-  //           // Retrieve latitude & longitude coordinates from `navigator.geolocation` Web API
-  //           navigator.geolocation.getCurrentPosition(({ coords }) => {
-  //               const lat = coords.latitude;
-  //               const lon = coords.longitude
-  //               setCurrlat(lat);
-  //               setCurrlon(lon)
-  //           })
-  //       }
-  //   }, []);
+    useEffect(() => {
+        if('geolocation' in navigator) {
+            // Retrieve latitude & longitude coordinates from `navigator.geolocation` Web API
+            navigator.geolocation.getCurrentPosition(({ coords }) => {
+                const lat = coords.latitude;
+                const lon = coords.longitude
+                setCurrlat(lat);
+                setCurrlon(lon)
+            })
+        }
+    }, []);
 
   let list = []
   // let scene = document.querySelector('a-scene');
@@ -89,10 +89,10 @@ export default function ArPage() {
             </a-entity>
           </a-entity>
         )
-      //   nav.push(
-      // <a-entity gps-new-entity-place={"latitude:-7.289226 ; longitude:-112.797000"} position='0 30 0' look-at={id} gltf-model={'#panah'} animation-mixer='loop-repeat' scale={'0.5 0.5 0.5'}>
-      //     </a-entity>
-      //   )
+        nav.push(
+      <a-entity gps-new-entity-place={"latitude:"+currlat+" ; longitude:"+currlon} position='0 30 0' look-at={id} gltf-model={'#panah'} animation-mixer='loop-repeat' scale={'0.5 0.5 0.5'}>
+          </a-entity>
+        )
       }
       
        
@@ -128,7 +128,7 @@ export default function ArPage() {
         vr-mode-ui='enabled: false' 
         arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false' 
         renderer='antialias: true; alpha: true'>
-          <a-camera gps-new-camera='gpsMinDistance: 5'></a-camera>
+          <a-camera gps-new-camera='gpsMinDistance: 5; gpsTimeInterval: 0'></a-camera>
           <a-assets>
             <a-asset-item id="arrow" src="assets/direction.glb"></a-asset-item>
             <a-asset-item id="location" src="/assets/location.gltf"></a-asset-item>
@@ -136,6 +136,7 @@ export default function ArPage() {
             <a-asset-item id="panah" src="assets/arrow.glb"></a-asset-item>
           </a-assets>
         {list} 
+        {nav}
       </a-scene>
     </body>
   );
