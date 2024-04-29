@@ -49,6 +49,8 @@ export default function ArPage() {
 
   let list = []
   // let scene = document.querySelector('a-scene');
+  lat = -7.289226
+  lon = 112.797000
   if(latlon != null){
     lat = latlon.lat;
     lon = latlon.lon;
@@ -87,10 +89,10 @@ export default function ArPage() {
             </a-entity>
           </a-entity>
         )
-        nav.push(
-      <a-entity gps-new-entity-place={"latitude:-7.289226 ; longitude:-112.797000"} position='0 30 0' look-at={id} gltf-model={'#panah'} animation-mixer='loop-repeat' scale={'0.5 0.5 0.5'}>
-          </a-entity>
-        )
+      //   nav.push(
+      // <a-entity gps-new-entity-place={"latitude:-7.289226 ; longitude:-112.797000"} position='0 30 0' look-at={id} gltf-model={'#panah'} animation-mixer='loop-repeat' scale={'0.5 0.5 0.5'}>
+      //     </a-entity>
+      //   )
       }
       
        
@@ -134,7 +136,6 @@ export default function ArPage() {
             <a-asset-item id="panah" src="assets/arrow.glb"></a-asset-item>
           </a-assets>
         {list} 
-        {nav}
       </a-scene>
     </body>
   );
