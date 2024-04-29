@@ -89,11 +89,8 @@ export default function ArPage() {
             </a-entity>
           </a-entity>
         )
+        console.log(id)
       }
-      nav.push(
-        <a-entity gps-new-entity-place={"latitude:"+currlat+" ; longitude:"+currlon} position='0 0 0' look-at={idloc} gltf-model={'#panah'} animation-mixer='loop-repeat' scale={'0.5 0.5 0.5'}>
-            </a-entity>
-          )
       
        
       
@@ -120,6 +117,11 @@ export default function ArPage() {
       // });
       // scene.appendChild(model);
   };
+  nav.push(
+    <a-entity gps-new-entity-place={"latitude:"+currlat+" ; longitude:"+currlon} position='0 0 0' id="nav" look-at={idloc} gltf-model={'#panah'} animation-mixer='loop-repeat' scale={'0.5 0.5 0.5'}>
+        </a-entity>
+      )
+      console.log(idloc)
 
 
   return (
