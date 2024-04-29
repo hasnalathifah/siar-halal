@@ -44,6 +44,7 @@ export default function ArPage() {
   
   console.log(lat);
   console.log(lon);
+  let nav = []
   let idloc
  
 
@@ -74,8 +75,8 @@ export default function ArPage() {
             </a-entity>
           </a-entity>
         )
-        list.push(
-          <a-entity position={position} look-at={id} gltf-model={'#panah'} animation-mixer='loop-repeat' scale={scale}>
+        nav.push(
+          <a-entity gps-new-entity-place="latitude: -7.289226; longitude: 112.797000" position="0 30 0" look-at={id} gltf-model={'#panah'} animation-mixer='loop-repeat' scale={'0.5 0.5 0.5'}>
           </a-entity>
         )
       }
@@ -121,10 +122,8 @@ export default function ArPage() {
             <a-asset-item id="panah" src="assets/arrow.glb"></a-asset-item>
           </a-assets>
         {list} 
+        {nav}
       </a-scene>
-      <div className=" justify-center fixed flex">
-          <button className=' flex items-center justify-center border-blue-gray-900 bg-blue-gray-100 text-blue-gray-800'>Button</button>
-      </div>
     </body>
   );
 }
