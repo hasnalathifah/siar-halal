@@ -38,7 +38,7 @@ export default function ArPage() {
     useEffect(() => {
         if('geolocation' in navigator) {
             // Retrieve latitude & longitude coordinates from `navigator.geolocation` Web API
-            navigator.geolocation.getCurrentPosition(({ coords }) => {
+            navigator.geolocation.watchPosition(({ coords }) => {
                 const lat = coords.latitude;
                 const lon = coords.longitude
                 setCurrlat(lat);
@@ -85,8 +85,9 @@ export default function ArPage() {
         const position = "0 0 0"
         list.push(
           <a-entity gps-new-entity-place={'latitude:'+latitude+'; longitude:'+longitude} id={id} look-at={target} gltf-model={model} animation-mixer='loop-repeat' scale={scale}>
-            <a-entity look-at={target} gltf-model={'#finish'}  animation-mixer='loop-repeat' scale={scale}>
-            </a-entity>
+            {/* <a-entity look-at={target} gltf-model={'#finish'}  animation-mixer='loop-repeat' scale={scale}>
+            </a-entity> */}
+            <button>button</button>
           </a-entity>
         )
         console.log(id)
@@ -118,10 +119,9 @@ export default function ArPage() {
       // scene.appendChild(model);
   };
   nav.push(
-    <a-entity gps-new-entity-place={"latitude:"+currlat+" ; longitude:"+currlon} position='0 0 0' id="nav" look-at={'#target'+idloc} gltf-model={'#panah'} animation-mixer='loop-repeat' scale={'0.5 0.5 0.5'}>
+    <a-entity gps-new-entity-place={"latitude:"+currlat+" ; longitude:"+currlon} position='0 0 5' id="nav" look-at={'#target'+idloc} gltf-model={'#panah'} animation-mixer='loop-repeat' scale={'0.3 0.3 0.3'}>
         </a-entity>
       )
-      console.log(idloc)
 
 
   return (
