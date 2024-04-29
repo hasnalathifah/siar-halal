@@ -81,7 +81,7 @@ export default function ArPage() {
       else {
         target = '[gps-new-camera]'
         model = '#location'
-        idloc = id
+        idloc = i
         const position = "0 0 0"
         list.push(
           <a-entity gps-new-entity-place={'latitude:'+latitude+'; longitude:'+longitude} id={id} look-at={target} gltf-model={model} animation-mixer='loop-repeat' scale={scale}>
@@ -118,7 +118,7 @@ export default function ArPage() {
       // scene.appendChild(model);
   };
   nav.push(
-    <a-entity gps-new-entity-place={"latitude:"+currlat+" ; longitude:"+currlon} position='0 0 0' id="nav" look-at={idloc} gltf-model={'#panah'} animation-mixer='loop-repeat' scale={'0.5 0.5 0.5'}>
+    <a-entity gps-new-entity-place={"latitude:"+currlat+" ; longitude:"+currlon} position='0 0 0' id="nav" look-at={'#target'+idloc} gltf-model={'#panah'} animation-mixer='loop-repeat' scale={'0.5 0.5 0.5'}>
         </a-entity>
       )
       console.log(idloc)
