@@ -118,7 +118,7 @@ export default function ArPage() {
       // scene.appendChild(model);
   };
   nav.push(
-    <a-entity gps-new-entity-place={"latitude:"+currlat+" ; longitude:"+currlon} position='0 0 30' id="nav" look-at={'#target'+idloc} gltf-model={'#panah'} animation-mixer='loop-repeat' scale={'0.3 0.3 0.3'}>
+    <a-entity gps-new-entity-place={"latitude:"+currlat+" ; longitude:"+currlon} position='0 10 30' id="nav" look-at={'#target'+idloc} gltf-model={'#panah'} animation-mixer='loop-repeat' scale={'0.3 0.3 0.3'}>
         </a-entity>
       )
 
