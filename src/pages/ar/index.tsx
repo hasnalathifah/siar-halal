@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 // import {lookAt} from '@/pages/ar/component/look-at';
 
 type ent = {
@@ -31,9 +32,20 @@ export default function ArPage() {
 
   // // console.log(lat[length-1])
 
-  lat = -7.0
-  lon = 102.0
-  console.log(latlon)
+  const [currlat, setCurrlat] = useState();
+    const [currlon, setCurrlon] = useState();
+
+    useEffect(() => {
+        if('geolocation' in navigator) {
+            // Retrieve latitude & longitude coordinates from `navigator.geolocation` Web API
+            navigator.geolocation.getCurrentPosition(({ coords }) => {
+                const lat = coords.latitude;
+                const lon = coords.longitude
+                setCurrlat(lat);
+                setCurrlon(lon)
+            })
+        }
+    }, []);
 
   let list = []
   // let scene = document.querySelector('a-scene');
@@ -76,7 +88,7 @@ export default function ArPage() {
           </a-entity>
         )
         nav.push(
-          <a-entity gps-new-entity-place="latitude: -7.289226; longitude: 112.797000" position="0 30 0" look-at={id} gltf-model={'#panah'} animation-mixer='loop-repeat' scale={'0.5 0.5 0.5'}>
+          <a-entity gps-new-entity-place={"latitude:"+currlat+" ; longitude:"+currlon} position='0 30 0' look-at={id} gltf-model={'#panah'} animation-mixer='loop-repeat' scale={'0.5 0.5 0.5'}>
           </a-entity>
         )
       }
