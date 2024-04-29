@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 // import {lookAt} from '@/pages/ar/component/look-at';
 
 type ent = {
@@ -21,6 +22,7 @@ export default function ArPage() {
   //   Lat = JSON.parse(localStorage.getItem("lat")|| '{}')
   //   Lon = JSON.parse(localStorage.getItem("lon")|| '{}')
   // }
+  const router = useRouter();
   const seachParams = useSearchParams()
   get = seachParams.get('str')
   console.log(get)
@@ -42,7 +44,7 @@ export default function ArPage() {
   
   console.log(lat);
   console.log(lon);
-  
+  let idloc
  
 
   for (let i = lat.length-1; i > -1; i--) {
@@ -64,10 +66,16 @@ export default function ArPage() {
       else {
         target = '[gps-new-camera]'
         model = '#location'
+        idloc = id
+        const position = "0 0 0"
         list.push(
           <a-entity gps-new-entity-place={'latitude:'+latitude+'; longitude:'+longitude} id={id} look-at={target} gltf-model={model} animation-mixer='loop-repeat' scale={scale}>
-            <a-entity material='color: red' geometry='primitive: box' look-at={target} animation-mixer='loop-repeat' scale={scale}>
+            <a-entity look-at={target} gltf-model={'#finish'}  animation-mixer='loop-repeat' scale={scale}>
             </a-entity>
+          </a-entity>
+        )
+        list.push(
+          <a-entity position={position} look-at={id} gltf-model={'#panah'} animation-mixer='loop-repeat' scale={scale}>
           </a-entity>
         )
       }
@@ -108,6 +116,8 @@ export default function ArPage() {
         <a-assets>
           <a-asset-item id="arrow" src="assets/direction.glb"></a-asset-item>
           <a-asset-item id="location" src="/assets/location.gltf"></a-asset-item>
+          <a-asset-item id="finish" src="/assets/finish.glb"></a-asset-item>
+          <a-asset-item id="panah" src="assets/arrow.glb"></a-asset-item>
         </a-assets>
       {list} 
 	  </a-scene>
