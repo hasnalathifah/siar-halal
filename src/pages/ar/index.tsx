@@ -32,20 +32,20 @@ export default function ArPage() {
 
   // // console.log(lat[length-1])
 
-  const [currlat, setCurrlat] = useState();
-    const [currlon, setCurrlon] = useState();
+  // const [currlat, setCurrlat] = useState();
+  //   const [currlon, setCurrlon] = useState();
 
-    useEffect(() => {
-        if('geolocation' in navigator) {
-            // Retrieve latitude & longitude coordinates from `navigator.geolocation` Web API
-            navigator.geolocation.getCurrentPosition(({ coords }) => {
-                const lat = coords.latitude;
-                const lon = coords.longitude
-                setCurrlat(lat);
-                setCurrlon(lon)
-            })
-        }
-    }, []);
+  //   useEffect(() => {
+  //       if('geolocation' in navigator) {
+  //           // Retrieve latitude & longitude coordinates from `navigator.geolocation` Web API
+  //           navigator.geolocation.getCurrentPosition(({ coords }) => {
+  //               const lat = coords.latitude;
+  //               const lon = coords.longitude
+  //               setCurrlat(lat);
+  //               setCurrlon(lon)
+  //           })
+  //       }
+  //   }, []);
 
   let list = []
   // let scene = document.querySelector('a-scene');
