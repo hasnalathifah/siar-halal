@@ -108,18 +108,23 @@ export default function ArPage() {
 
 
   return (
-    <a-scene
-      vr-mode-ui='enabled: false' 
-      arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false' 
-      renderer='antialias: true; alpha: true'>
-        <a-camera gps-new-camera='gpsMinDistance: 5'></a-camera>
-        <a-assets>
-          <a-asset-item id="arrow" src="assets/direction.glb"></a-asset-item>
-          <a-asset-item id="location" src="/assets/location.gltf"></a-asset-item>
-          <a-asset-item id="finish" src="/assets/finish.glb"></a-asset-item>
-          <a-asset-item id="panah" src="assets/arrow.glb"></a-asset-item>
-        </a-assets>
-      {list} 
-	  </a-scene>
+    <body>
+      <a-scene
+        vr-mode-ui='enabled: false' 
+        arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false' 
+        renderer='antialias: true; alpha: true'>
+          <a-camera gps-new-camera='gpsMinDistance: 5'></a-camera>
+          <a-assets>
+            <a-asset-item id="arrow" src="assets/direction.glb"></a-asset-item>
+            <a-asset-item id="location" src="/assets/location.gltf"></a-asset-item>
+            <a-asset-item id="finish" src="/assets/finish.glb"></a-asset-item>
+            <a-asset-item id="panah" src="assets/arrow.glb"></a-asset-item>
+          </a-assets>
+        {list} 
+      </a-scene>
+      <div className=" justify-center fixed flex">
+          <button className=' flex items-center justify-center border-blue-gray-900 bg-blue-gray-100 text-blue-gray-800'>Button</button>
+      </div>
+    </body>
   );
 }
