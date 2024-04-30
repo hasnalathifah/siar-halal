@@ -1,12 +1,9 @@
-"use client";
-
 import { Form } from "@/components/form";
 // import Image from "next/image";
 import AdminNavbar from "@/components/admnavbar";
 import CardComp from "@/components/cardcomp";
 import Sidebar from "@/components/sidebar";
 import { Input, Button } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
 // import Card from "@/components/card";
 // import { getResto } from "../lib/data";
 
@@ -18,7 +15,6 @@ import { useEffect, useState } from "react";
 // }
 
 export default function Dashboard() {
-
     return (
         <div className=" bg-blue-gray-50">
             <Sidebar/>
