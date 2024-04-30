@@ -148,7 +148,7 @@ export default function ArPage() {
 let info , finish 
 dist = distance(Number(currlat),  Number(dlat), Number(currlon), Number(dlon))
 console.log(dist)
-info = <div className=" w-full grid justify-center items-center bg-blue-gray-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+info = <div className=" w-full grid mt-4 justify-center items-center bg-blue-gray-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
   <div className="grid justify-center items-center p-4 leading-normal">
       <p className=" mb-2 break-words font-bold tracking-tight text-gray-100 dark:text-white">dist = {decimalAdjust("round", dist, -2)} meters</p>
   </div>
