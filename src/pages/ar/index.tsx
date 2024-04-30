@@ -25,12 +25,12 @@ export default function ArPage() {
   //   router.push('/dashboard');
   // }
   
-  const entref = useRef()
-  let finish = entref.current
-  
-  finish.addEventListener("click", (e: { currentTarget: any; }) => {
-    router.push('/dashboard');
-  });
+  useEffect(() => {
+    let finish = document.getElementById('target0');
+    finish?.addEventListener('click',(e: { currentTarget: any; }) => {
+      router.push('/dashboard');
+    });
+  }, [router])
   // let latitude, longitude, id, target, model
   // let Lat = []
   // let Lon = []
