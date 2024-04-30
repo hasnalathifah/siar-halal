@@ -23,7 +23,7 @@ export default function Sidebar() {
           </button>
           {/* Brand */}
           <Link 
-              href="#pablo"
+              href="/dashboard"
               className=" text-blue-600 md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
             >
               SIARHalal
@@ -49,7 +49,7 @@ export default function Sidebar() {
             <div className="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-blueGray-200">
               <div className="flex flex-wrap">
                 <div className="w-6/12">
-                  <Link href="#pablo"
+                  <Link href="/dashboard"
                       className=" text-blue-600 md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
                     >
                       SIARHalal

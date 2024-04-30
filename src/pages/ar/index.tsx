@@ -4,7 +4,6 @@ import * as React from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { useRef } from 'react';
 import Link from 'next/link';
 // import {lookAt} from '@/pages/ar/component/look-at';
 
@@ -126,8 +125,6 @@ export default function ArPage() {
         dlon = longitude
         list.push(
           <a-entity gps-new-entity-place={'latitude:'+latitude+'; longitude:'+longitude} id={id} look-at={target} gltf-model={model} animation-mixer='loop-repeat' scale={scale}>
-            <a-entity look-at={target} gltf-model={'#finish'}  animation-mixer='loop-repeat' scale={scale}>
-            </a-entity>
           </a-entity>
         )
         // console.log(id)
@@ -151,18 +148,30 @@ export default function ArPage() {
 let info , finish 
 dist = distance(Number(currlat),  Number(dlat), Number(currlon), Number(dlon))
 console.log(dist)
-info = <div className=' text-xl text-black'>dist = {decimalAdjust("round", dist, -2)} meters</div>
+info = <div className=" w-full grid justify-center items-center bg-blue-gray-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+  <div className="grid justify-center items-center p-4 leading-normal">
+      <p className=" mb-2 break-words font-bold tracking-tight text-gray-100 dark:text-white">dist = {decimalAdjust("round", dist, -2)} meters</p>
+  </div>
+</div>
 
-
-if(dist < 100){
-  finish=<Link href='/dashboard' type='button' className=' text-center relative w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-8 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none mt-96'>Selesai</Link>
+if(dist < 20){
+  finish= <div className=" mt-72 w-full flex flex-row items-center bg-blue-gray-700 opacity-90 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+  <div className="flex flex-col justify-between p-4 leading-normal">
+      <p className=" mb-2 break-words font-bold tracking-tight text-gray-100 dark:text-white">Anda telah sampai di tujuan</p>
+      <Link href='/dashboard' type='button' className=' text-center relative text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none'>Selesai</Link>
+  </div>
+</div>
+    // <div>
+    //   <div>Anda telah sampai di tujuan</div>
+    //   <Link href='/dashboard' type='button' className=' text-center relative w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-8 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none mt-96'>Selesai</Link>
+    // </div>
 
 }
 
 console.log(currlat)
 
   nav.push(
-    <a-entity gps-new-entity-place={"latitude:"+currlat+" ; longitude:"+currlon} position='20 0 0' id="nav" look-at={'#target'+idloc} gltf-model={'#panah'} animation-mixer='loop-repeat' scale={'0.1 0.1 0.1'}>
+    <a-entity gps-new-entity-place={"latitude:"+currlat+" ; longitude:"+currlon} position='15 0 0' id="nav" look-at={'#target'+idloc} gltf-model={'#panah'} animation-mixer='loop-repeat' scale={'0.1 0.1 0.1'}>
         </a-entity>
   )
 
