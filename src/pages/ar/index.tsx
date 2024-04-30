@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useRef } from 'react';
 // import {lookAt} from '@/pages/ar/component/look-at';
 
 type ent = {
@@ -13,9 +14,23 @@ type ent = {
   scale: any
 }
 
+
+
+
 export default function ArPage() {
   let get, latlon
   let lat,lon
+  const router = useRouter();
+  // function push (){
+  //   router.push('/dashboard');
+  // }
+  
+  const entref = useRef()
+  let finish = entref.current
+  
+  finish.addEventListener("click", (e: { currentTarget: any; }) => {
+    router.push('/dashboard');
+  });
   // let latitude, longitude, id, target, model
   // let Lat = []
   // let Lon = []
@@ -23,7 +38,7 @@ export default function ArPage() {
   //   Lat = JSON.parse(localStorage.getItem("lat")|| '{}')
   //   Lon = JSON.parse(localStorage.getItem("lon")|| '{}')
   // }
-  const router = useRouter();
+ 
   const seachParams = useSearchParams()
   get = seachParams.get('str')
   console.log(get)
@@ -84,7 +99,7 @@ export default function ArPage() {
         idloc = i
         const position = "0 0 0"
         list.push(
-          <a-entity gps-new-entity-place={'latitude:'+latitude+'; longitude:'+longitude} id={id} look-at={target} gltf-model={model} animation-mixer='loop-repeat' scale={scale}>
+          <a-entity ref={entref} gps-new-entity-place={'latitude:'+latitude+'; longitude:'+longitude} id={id} look-at={target} gltf-model={model} animation-mixer='loop-repeat' scale={scale}>
             <a-entity look-at={target} gltf-model={'#finish'}  animation-mixer='loop-repeat' scale={scale}>
             </a-entity>
           </a-entity>
@@ -118,7 +133,7 @@ export default function ArPage() {
       // scene.appendChild(model);
   };
   nav.push(
-    <a-entity gps-new-entity-place={"latitude:"+currlat+" ; longitude:"+currlon} position='0 2 30' id="nav" look-at={'#target'+idloc} gltf-model={'#panah'} animation-mixer='loop-repeat' scale={'0.3 0.3 0.3'}>
+    <a-entity gps-new-entity-place={"latitude:"+currlat+" ; longitude:"+currlon} position='0 0 10' id="nav" look-at={'#target'+idloc} gltf-model={'#panah'} animation-mixer='loop-repeat' scale={'0.3 0.3 0.3'}>
         </a-entity>
       )
 
