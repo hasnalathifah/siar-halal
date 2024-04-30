@@ -99,7 +99,7 @@ export default function ArPage() {
         idloc = i
         const position = "0 0 0"
         list.push(
-          <a-entity ref={entref} gps-new-entity-place={'latitude:'+latitude+'; longitude:'+longitude} id={id} look-at={target} gltf-model={model} animation-mixer='loop-repeat' scale={scale}>
+          <a-entity gps-new-entity-place={'latitude:'+latitude+'; longitude:'+longitude} id={id} look-at={target} gltf-model={model} animation-mixer='loop-repeat' scale={scale}>
             <a-entity look-at={target} gltf-model={'#finish'}  animation-mixer='loop-repeat' scale={scale}>
             </a-entity>
           </a-entity>
