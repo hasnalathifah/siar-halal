@@ -86,15 +86,15 @@ export default function ArPage() {
  
   const seachParams = useSearchParams()
   get = seachParams.get('str')
-
+  lat = -7.289226
+  lon = 112.797000
+  latlon = {lat, lon}
   data = JSON.parse(get)
-  latlon = data.latlon
+  if(data !== null || data !== undefined) latlon = data.latlon
   let ins = data.ins
 
   let list = []
   // let scene = document.querySelector('a-scene');
-  lat = -7.289226
-  lon = 112.797000
   if(latlon != null){
     lat = latlon.lat;
     lon = latlon.lon;
