@@ -99,6 +99,8 @@ export default function ArPage() {
   }
   else data = {latlon, ins}
 
+  console.log(latlon)
+
   let list = []
   // let scene = document.querySelector('a-scene');
   if(latlon != null){
