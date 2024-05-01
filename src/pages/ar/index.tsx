@@ -79,7 +79,7 @@ function decimalAdjust(type: string, value: unknown, exp: number) {
 }
 
 export default function ArPage() {
-  let get, data, inv, sign, ins
+  let get, latlon, data, inv, sign, ins
   let lat,lon
   const router = useRouter();
   const [invrange, setInvrange] = useState(Number)
