@@ -93,8 +93,11 @@ export default function ArPage() {
   sign = 0
   let ins = {inv, sign}
   data = JSON.parse(get)
-  if(data !== null || data !== undefined) latlon = data.latlon
-  ins = data.ins
+  if(data !== null || data !== undefined) {
+    latlon = data.latlon
+    ins = data.ins
+  }
+  else data = {latlon, ins}
 
   let list = []
   // let scene = document.querySelector('a-scene');
