@@ -240,8 +240,8 @@ if(dist_ins <= 0.5){
         {nav}
       </a-scene>
       <div className=' grid grid-cols-6 gap-4'>
-        <div className=' col-start-1 col-end-2 ml-2'>{dir}</div>
-        <div className=' col-start-1 col-end-2 ml-2'>{info}</div>
+        <div className=' col-start-1 ml-2'>{dir}</div>
+        <div className=' col-start-1 ml-2'>{info}</div>
       </div>
       <div className='relative grid justify-center items-center'>
         <div className=' justify-center items-center'>{finish}</div>
