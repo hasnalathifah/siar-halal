@@ -7,6 +7,14 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 // import {lookAt} from '@/pages/ar/component/look-at';
 
+function getSign(n: number){
+  let sign
+  if(n == 0) sign = "continue"
+  else if(n==2)sign = "turn right"
+  else if(n==-2) sign = "turn left"
+  else if(n==4) sign = "Arrived"
+  return sign
+}
 
 function distance(lat1: number,
   lat2: number, lon1: number, lon2: number)
@@ -62,7 +70,7 @@ function decimalAdjust(type: string, value: unknown, exp: number) {
 }
 
 export default function ArPage() {
-  let get, latlon
+  let get, latlon, data
   let lat,lon
   const router = useRouter();
   // function push (){
@@ -78,8 +86,11 @@ export default function ArPage() {
  
   const seachParams = useSearchParams()
   get = seachParams.get('str')
-  // console.log(get)
-  latlon = JSON.parse(get)
+
+  data = JSON.parse(get)
+  latlon = data.latlon
+  let ins = data.ins
+
   let list = []
   // let scene = document.querySelector('a-scene');
   lat = -7.289226
@@ -92,7 +103,7 @@ export default function ArPage() {
   // console.log(lat);
   // console.log(lon);
   let nav = []
-  let idloc, dlat: any, dlon: any, dist
+  let idloc, dlat: any, dlon: any, dist, pointlat=[], pointlon = []
  
   // // if (data !== null) latlon = JSON.parse(data)
 
@@ -106,6 +117,14 @@ export default function ArPage() {
       let longitude = lon[i];
       // console.log(latitude);
       // console.log(longitude);
+      for (let j = ins.inv.length-1; j > -1; j--) {
+        if(i == ins.inv[j][0]){
+          pointlat[j] = lat[i]
+          pointlon[j] = lon[i]
+          console.log(lat[i])
+        }
+        
+      }
       let id = 'target'+i
       let target, model 
       let scale = '0.5 0.5 0.5'
@@ -145,12 +164,14 @@ export default function ArPage() {
     }
 }, [dlat, dlon]);
 
-let info , finish 
+
+
+let info , finish, dir, dist_ins 
 dist = distance(Number(currlat),  Number(dlat), Number(currlon), Number(dlon))
 console.log(dist)
-info = <div className=" w-full grid mt-4 justify-center items-center bg-blue-gray-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-  <div className="grid justify-center items-center p-4 leading-normal">
-      <p className=" mb-2 break-words font-bold tracking-tight text-gray-100 dark:text-white">dist = {decimalAdjust("round", dist, -2)} meters</p>
+info = <div className="mt-4 justify-center items-center bg-blue-gray-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+  <div className="grid justify-center items-center p-2 leading-normal">
+      <p className="break-words tracking-tight text-gray-100 dark:text-white">{decimalAdjust("round", dist, -2)} m</p>
   </div>
 </div>
 
@@ -161,14 +182,27 @@ if(dist < 20){
       <Link href='/dashboard' type='button' className=' text-center relative text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none'>Selesai</Link>
   </div>
 </div>
-    // <div>
-    //   <div>Anda telah sampai di tujuan</div>
-    //   <Link href='/dashboard' type='button' className=' text-center relative w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-8 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none mt-96'>Selesai</Link>
-    // </div>
-
 }
 
-console.log(currlat)
+let n = 0
+dist_ins = distance(Number(currlat),  Number(pointlat[n]), Number(currlon), Number(pointlon[n]))
+
+dir = <div className="mt-4 justify-center items-center bg-blue-gray-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+  <div className="grid justify-center items-center p-2 leading-normal">
+    <p className="break-words tracking-tight text-gray-100 dark:text-white">{getSign(ins.sign[n])}</p>
+    <p className="break-words tracking-tight text-gray-100 dark:text-white">{decimalAdjust("round", dist_ins, -2)} m</p>
+  </div>
+</div>
+if(dist_ins <= 0.5){
+  n= n+1
+  dist_ins = distance(Number(currlat),  Number(pointlat[n]), Number(currlon), Number(pointlon[n]))
+  dir = <div className="mt-4 justify-center items-center bg-blue-gray-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+  <div className="grid justify-center items-center p-2 leading-normal">
+    <p className="break-words tracking-tight text-gray-100 dark:text-white">{getSign(ins.sign[n])}</p>
+    <p className="break-words tracking-tight text-gray-100 dark:text-white">{decimalAdjust("round", dist_ins, -2)} m</p>
+  </div>
+</div>
+}
 
   nav.push(
     <a-entity gps-new-entity-place={"latitude:"+currlat+" ; longitude:"+currlon} position='15 0 0' id="nav" look-at={'#target'+idloc} gltf-model={'#panah'} animation-mixer='loop-repeat' scale={'0.1 0.1 0.1'}>
@@ -191,8 +225,11 @@ console.log(currlat)
         {list} 
         {nav}
       </a-scene>
+      <div className=' grid grid-cols-6 gap-4'>
+        <div className=' col-start-1 col-end-2 ml-2'>{dir}</div>
+        <div className=' col-start-1 col-end-2 ml-2'>{info}</div>
+      </div>
       <div className='relative grid justify-center items-center'>
-        <div className=''>{info}</div>
         <div className=' justify-center items-center'>{finish}</div>
       </div>
     </body>

@@ -12,17 +12,25 @@ import { stringify } from "querystring";
 
 
 function setLatlon(data: any){
-    let latlon = {}
+    let latlon = {}, ins = {}
     let lat = []
     let lon = []
+    let inv = []
+    let sign = []
     for (let i = 0; i < data.paths[0].points.coordinates.length; i++) {
         lon [i] = data.paths[0].points.coordinates[i][0]
         lat [i] = data.paths[0].points.coordinates[i][1]
     }
+    for (let i = 0; i < data.paths[0].instructions.length; i++) {
+        inv.push(data.paths[0].instructions[i].interval)
+        sign.push(data.paths[0].instructions[i].sign)
+        
+    }
     localStorage.setItem("lat", JSON.stringify(lat));
     localStorage.setItem("lon", JSON.stringify(lon)); 
     latlon = {lat, lon}
-    return latlon
+    ins = {inv, sign}
+    return {latlon, ins}
 }
 
 export default function Items() {
@@ -126,12 +134,14 @@ export default function Items() {
 
     // console.log(resp)
 
-    let latlon = {}
+    let latlon = {}, data = {}
     let map = []
     let lat = []
     let lon = []
     if (resp.length !== 0) {
-        latlon = setLatlon(resp)
+        data = setLatlon(resp)
+        console.log(data)
+        latlon = data.latlon
         lat = latlon.lat
         lon = latlon.lon
         map.push(
@@ -143,7 +153,7 @@ export default function Items() {
             <span className="loading loading-dots loading-lg"></span>
         )
     }
-    const str = JSON.stringify(latlon)
+    const str = JSON.stringify(data)
     let arButton = []
     if (resp.length!=0){
         arButton.push(
