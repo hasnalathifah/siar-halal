@@ -16,6 +16,15 @@ function getSign(n: number){
   return sign
 }
 
+function getIcon(n: number){
+  let sign
+  if(n == 0) sign = <svg fill="none" height="24" viewBox="0 0 48 48" width="24" transform='rotate(-90)' xmlns="http://www.w3.org/2000/svg"><path d="m0 0h48v48h-48z" fill="#fff" fill-opacity=".01"/><g stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"><path d="m41.9999 24h-35.99998"/><path d="m30 12 12 12-12 12"/></g></svg>
+  else if(n==2)sign = <svg fill="none" height="24" viewBox="0 0 24 24" width="24" transform='scale(-1,1)' xmlns="http://www.w3.org/2000/svg"><g stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="m8 5-5 5 5 5"/><path d="m3 10h8c5.5228 0 10 4.4772 10 10v1"/></g></svg>
+  else if(n==-2) sign = <svg fill="none" height="24" viewBox="0 0 24 24" width="24" transform='scale(1,1)' xmlns="http://www.w3.org/2000/svg"><g stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="m8 5-5 5 5 5"/><path d="m3 10h8c5.5228 0 10 4.4772 10 10v1"/></g></svg>
+  else if(n==4) sign = <svg height="30" viewBox="0 0 21 21" width="30" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" transform="translate(4 2) scale(1.1,1.1)"><path d="m6.5 16.5407715c4-4.4500928 6-7.78586659 6-10.00732153 0-3.33218241-2.6862915-6.03344997-6-6.03344997s-6 2.70126756-6 6.03344997c0 2.22145494 2 5.55722873 6 10.00732153z"/><circle cx="6.5" cy="6.5" r="2.5"/></g></svg>
+  return sign
+}
+
 function distance(lat1: number,
   lat2: number, lon1: number, lon2: number)
 {
@@ -184,8 +193,9 @@ let info , finish, dir, dist_ins
 dist = distance(Number(currlat),  Number(dlat), Number(currlon), Number(dlon))
 console.log(dist)
 info = <div className="mt-4 justify-center items-center bg-blue-gray-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-  <div className="grid justify-center items-center p-2 leading-normal">
-      <p className="break-words tracking-tight text-gray-100 dark:text-white">{decimalAdjust("round", dist, -2)} m</p>
+  <div className="flex justify-center items-center p-2 leading-normal">
+    <div className='pr-1'><svg height="20" viewBox="0 0 21 21" width="20" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" transform="translate(4 2) scale(1.1,1.1)"><path d="m6.5 16.5407715c4-4.4500928 6-7.78586659 6-10.00732153 0-3.33218241-2.6862915-6.03344997-6-6.03344997s-6 2.70126756-6 6.03344997c0 2.22145494 2 5.55722873 6 10.00732153z"/><circle cx="6.5" cy="6.5" r="2.5"/></g></svg></div>
+    <p className="break-words tracking-tight text-gray-100 dark:text-white">{decimalAdjust("round", dist, -2)} m</p>
   </div>
 </div>
 
@@ -201,8 +211,9 @@ if(dist < 20){
 let n = 0
 dist_ins = distance(Number(currlat),  Number(pointlat[n]), Number(currlon), Number(pointlon[n]))
 
-dir = <div className="mt-4 justify-center items-center bg-blue-gray-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-  <div className="grid justify-center items-center p-2 leading-normal">
+dir = <div className=" card mt-4 bg-blue-gray-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+  <div className="card-body items-center text-center p-2">  
+    <div className=' justify-center items-center'>{getIcon(ins.sign[n])}</div>
     <p className="break-words tracking-tight text-gray-100 dark:text-white">{getSign(ins.sign[n])}</p>
     <p className="break-words tracking-tight text-gray-100 dark:text-white">{decimalAdjust("round", dist_ins, -2)} m</p>
   </div>
