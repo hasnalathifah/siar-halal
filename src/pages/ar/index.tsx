@@ -79,9 +79,10 @@ function decimalAdjust(type: string, value: unknown, exp: number) {
 }
 
 export default function ArPage() {
-  let get, latlon, data, inv, sign, ins
+  let get, data, inv, sign, ins
   let lat,lon
   const router = useRouter();
+  const [invrange, setInvrange] = useState(Number)
   // function push (){
   //   router.push('/dashboard');
   // }
@@ -208,22 +209,26 @@ if(dist < 20){
 </div>
 }
 
-let n = 0
-dist_ins = distance(Number(currlat),  Number(pointlat[n]), Number(currlon), Number(pointlon[n]))
 
+if (invrange==null || invrange==undefined){
+  setInvrange(0)
+}
+dist_ins = distance(Number(currlat),  Number(pointlat[invrange]), Number(currlon), Number(pointlon[invrange]))
 dir = <div className=" card mt-4 bg-blue-gray-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
   <div className="card-body items-center text-center p-2">  
-    <div className=' justify-center items-center'>{getIcon(ins.sign[n])}</div>
-    <p className="break-words tracking-tight text-gray-100 dark:text-white">{getSign(ins.sign[n])}</p>
+    <div className=' justify-center items-center'>{getIcon(ins.sign[invrange])}</div>
+    <p className="break-words tracking-tight text-gray-100 dark:text-white">{getSign(ins.sign[invrange])}</p>
     <p className="break-words tracking-tight text-gray-100 dark:text-white">{decimalAdjust("round", dist_ins, -2)} m</p>
   </div>
 </div>
-if(dist_ins <= 0.5){
-  n= n+1
-  dist_ins = distance(Number(currlat),  Number(pointlat[n]), Number(currlon), Number(pointlon[n]))
+
+if(dist_ins <= 15){
+  setInvrange(invrange+1)
+  dist_ins = distance(Number(currlat),  Number(pointlat[invrange]), Number(currlon), Number(pointlon[invrange]))
   dir = <div className="mt-4 justify-center items-center bg-blue-gray-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
   <div className="grid justify-center items-center p-2 leading-normal">
-    <p className="break-words tracking-tight text-gray-100 dark:text-white">{getSign(ins.sign[n])}</p>
+  <div className=' justify-center items-center'>{getIcon(ins.sign[invrange])}</div>
+    <p className="break-words tracking-tight text-gray-100 dark:text-white">{getSign(ins.sign[invrange])}</p>
     <p className="break-words tracking-tight text-gray-100 dark:text-white">{decimalAdjust("round", dist_ins, -2)} m</p>
   </div>
 </div>
