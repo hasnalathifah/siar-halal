@@ -91,22 +91,27 @@ export default function ArPage() {
   inv = [0, 0]
   sign = 0
   data = JSON.parse(get)
-  if(data !== null || data !== undefined) {
-    latlon = data.latlon
-    ins = data.ins
-  }
-  else {
-    latlon = {lat, lon}
-    ins = {inv, sign}
-  }
+  // if(data !== null || data !== undefined) {
+  //   latlon = data.latlon
+  //   ins = data.ins
+  // }
+  // else {
+  //   latlon = {lat, lon}
+  //   ins = {inv, sign}
+  // }
 
-  console.log(latlon)
+  // console.log(latlon)
 
   let list = []
   // let scene = document.querySelector('a-scene');
-  if(latlon != null){
-    lat = latlon.lat;
-    lon = latlon.lon;
+  if(data !== null){
+    lat = data.latlon.lat;
+    lon = data.latlon.lon;
+    ins = data.ins
+  }
+  else{
+    latlon = {lat, lon}
+    ins = {inv, sign}
   }
   
   // console.log(lat);
