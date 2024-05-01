@@ -239,9 +239,9 @@ if(dist_ins <= 0.5){
         {list} 
         {nav}
       </a-scene>
-      <div className=' grid grid-cols-6 gap-4'>
-        <div className=' col-start-1 col-span-3 ml-2'>{dir}</div>
-        <div className=' col-start-1 col-span-3 ml-2'>{info}</div>
+      <div className=' grid grid-cols-6 justify-center items-center gap-4'>
+        <div className=' col-start-1 col-auto justify-center items-center ml-2'>{dir}</div>
+        <div className=' col-start-1 col-auto justify-center items-center ml-2'>{info}</div>
       </div>
       <div className='relative grid justify-center items-center'>
         <div className=' justify-center items-center'>{finish}</div>
