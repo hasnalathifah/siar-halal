@@ -70,7 +70,7 @@ function decimalAdjust(type: string, value: unknown, exp: number) {
 }
 
 export default function ArPage() {
-  let get, latlon, data, inv, sign
+  let get, latlon, data, inv, sign, ins
   let lat,lon
   const router = useRouter();
   // function push (){
@@ -88,16 +88,17 @@ export default function ArPage() {
   get = seachParams.get('str')
   lat = -7.289226
   lon = 112.797000
-  latlon = {lat, lon}
   inv = [0, 0]
   sign = 0
-  let ins = {inv, sign}
   data = JSON.parse(get)
   if(data !== null || data !== undefined) {
     latlon = data.latlon
     ins = data.ins
   }
-  else data = {latlon, ins}
+  else {
+    latlon = {lat, lon}
+    ins = {inv, sign}
+  }
 
   console.log(latlon)
 
