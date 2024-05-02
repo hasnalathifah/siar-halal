@@ -245,11 +245,11 @@ if(dist_ins <= 15){
         vr-mode-ui='enabled: false' 
         arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false' 
         renderer='antialias: true; alpha: true'>
-          <a-camera far='50' gps-new-camera='maxDistance: 50; gpsMinDistance: 5; gpsTimeInterval: 0'></a-camera>
+          <a-camera far='100' gps-new-camera='maxDistance: 100; gpsMinDistance: 5; gpsTimeInterval: 0'></a-camera>
           <a-assets>
             <a-asset-item id="arrow" src="assets/direction.glb"></a-asset-item>
             <a-asset-item id="location" src="/assets/location.gltf"></a-asset-item>
-            <a-asset-item id="finish" src="/assets/finish.glb"></a-asset-item>
+            <a-asset-item id="finish" src="/assets/finish.glb "></a-asset-item>
             <a-asset-item id="panah" src="assets/carArrow.glb"></a-asset-item>
           </a-assets>
         {list} 
