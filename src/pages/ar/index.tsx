@@ -81,18 +81,7 @@ function decimalAdjust(type: string, value: unknown, exp: number) {
 export default function ArPage() {
   let get, latlon, data, inv, sign, ins
   let lat,lon
-  const router = useRouter();
   const [invrange, setInvrange] = useState(Number)
-  // function push (){
-  //   router.push('/dashboard');
-  // }
-  // let latitude, longitude, id, target, model
-  // let Lat = []
-  // let Lon = []
-  // if (typeof window !== 'undefined') {
-  //   Lat = JSON.parse(localStorage.getItem("lat")|| '{}')
-  //   Lon = JSON.parse(localStorage.getItem("lon")|| '{}')
-  // }
  
   const seachParams = useSearchParams()
   get = seachParams.get('str')
@@ -101,19 +90,9 @@ export default function ArPage() {
   inv = [0, 0]
   sign = 0
   data = JSON.parse(get)
-  // if(data !== null || data !== undefined) {
-  //   latlon = data.latlon
-  //   ins = data.ins
-  // }
-  // else {
-  //   latlon = {lat, lon}
-  //   ins = {inv, sign}
-  // }
-
-  // console.log(latlon)
 
   let list = []
-  // let scene = document.querySelector('a-scene');
+ 
   if(data !== null){
     lat = data.latlon.lat;
     lon = data.latlon.lon;
@@ -128,10 +107,6 @@ export default function ArPage() {
   // console.log(lon);
   let nav = []
   let idloc, dlat: any, dlon: any, dist, pointlat=[], pointlon = []
- 
-  // // if (data !== null) latlon = JSON.parse(data)
-
-  // // console.log(lat[length-1])
 
   const [currlat, setCurrlat] = useState();
   const [currlon, setCurrlon] = useState();
@@ -265,3 +240,11 @@ if(dist_ins <= 15){
     </body>
   );
 }
+
+  if (typeof window !== 'undefined') {
+    window.onload = () =>{
+      ArPage()
+    }
+  }
+
+
