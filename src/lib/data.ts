@@ -36,8 +36,8 @@ export const resto =[
       id_resto: 5,
       nama_resto: "Testing",
       alamat: "Jl. Teknik Sipil, Keputih, Sukolilo, Surabaya",
-      lat: -7.289868,
-      lon: 112.796230
+      lat: -7.288242,
+      lon: 112.795781
   }
 ]
 
