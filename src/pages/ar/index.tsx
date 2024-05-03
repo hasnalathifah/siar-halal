@@ -79,10 +79,13 @@ function decimalAdjust(type: string, value: unknown, exp: number) {
 }
 
 export default function ArPage() {
+  const [currlat, setCurrlat] = useState();
+  const [currlon, setCurrlon] = useState();
+  const [invrange, setInvrange] = useState(Number);
+
   let get, latlon, data, inv, sign, ins
   let lat,lon
-  const [invrange, setInvrange] = useState(Number)
- 
+
   const seachParams = useSearchParams()
   get = seachParams.get('str')
   lat = -7.289226
@@ -108,8 +111,6 @@ export default function ArPage() {
   let nav = []
   let idloc, dlat: any, dlon: any, dist, pointlat=[], pointlon = []
 
-  const [currlat, setCurrlat] = useState();
-  const [currlon, setCurrlon] = useState();
 
   for (let i = lat.length-1; i > -1; i--) {
       let latitude = lat[i];
@@ -241,10 +242,7 @@ if(dist_ins <= 15){
   );
 }
 
-  if (typeof window !== 'undefined') {
-    window.onload = () =>{
-      ArPage()
-    }
+  window.onload=()=>{
+    ArPage()
   }
-
 
