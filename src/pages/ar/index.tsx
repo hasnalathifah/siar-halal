@@ -7,6 +7,12 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 // import {lookAt} from '@/pages/ar/component/look-at';
 
+if (typeof window == undefined){
+  window.onload=()=>{
+    ArPage()
+  }
+}
+
 function getSign(n: number){
   let sign
   if(n == 0) sign = "continue"
@@ -242,7 +248,4 @@ if(dist_ins <= 15){
   );
 }
 
-  window.onload=()=>{
-    ArPage()
-  }
 
