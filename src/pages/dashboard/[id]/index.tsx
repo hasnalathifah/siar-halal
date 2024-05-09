@@ -104,7 +104,6 @@ export default function Items() {
                         'tunnel'
                         ],
                         details: ['road_class', 'surface'],
-                        vehicle: 'foot',
                         locale: 'en',
                         instructions: true,
                         calc_points: true,
