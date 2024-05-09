@@ -89,6 +89,7 @@ export default function Items() {
                     'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
+                        profile: 'foot',
                         points: [
                         [
                             srcLon,srcLat
