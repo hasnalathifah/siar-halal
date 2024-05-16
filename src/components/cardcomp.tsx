@@ -48,7 +48,7 @@ export default function CardComp() {
             <ul>
               {resto.map((resto) => (
                 <li key={resto.id_resto}>
-                  <a href={'dashboard/'+(resto.id_resto)+'?nama='+(resto.nama_resto)+'&alamat='+(resto.alamat)+'&lat='+(resto.lat)+'&lon='+(resto.lon)} className=" w-full flex flex-row items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+                  <a href={'dashboard/'+(resto.id_resto)+'?id='+(resto.id_resto)+'&nama='+(resto.nama_resto)+'&alamat='+(resto.alamat)+'&lat='+(resto.lat)+'&lon='+(resto.lon)} className=" w-full flex flex-row items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
                     <Image className="object-cover rounded-none rounded-s-lg" src="/image/food2.jpg" alt="" width={150} height={150}/>
                     <div className="flex flex-col justify-between p-4 leading-normal">
                         <p className="mb-2 font-bold tracking-tight text-gray-900 dark:text-white">{resto.nama_resto}</p>
