@@ -7,11 +7,11 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 // import {lookAt} from '@/pages/ar/component/look-at';
 
-if (typeof window != undefined){
-  window.onload=()=>{
-    ArPage()
-  }
-}
+// if (typeof window != undefined){
+//   window.onload=()=>{
+//     ArPage()
+//   }
+// }
 
 function getSign(n: number){
   let sign
