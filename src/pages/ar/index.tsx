@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 // import {lookAt} from '@/pages/ar/component/look-at';
 
-if (typeof window == undefined){
+if (typeof window != undefined){
   window.onload=()=>{
     ArPage()
   }
