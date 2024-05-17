@@ -89,7 +89,7 @@ export default function ArPage() {
   const [currlon, setCurrlon] = useState();
   const [invrange, setInvrange] = useState(Number);
 
-  let get, latlon, data, inv, sign, ins
+  let get, latlon, data, inv, sign, ins, mode
   let lat,lon
 
   const seachParams = useSearchParams()
@@ -106,6 +106,7 @@ export default function ArPage() {
     lat = data.latlon.lat;
     lon = data.latlon.lon;
     ins = data.ins
+    mode = data.mode
   }
   else{
     latlon = {lat, lon}
@@ -172,7 +173,18 @@ export default function ArPage() {
 
 
 
-let info , finish, dir, dist_ins 
+let info , finish, dir, dist_ins, back = []
+
+back.push(
+  <a href={"https://hadziq.8thwall.app/siarhalal?destlat=" + dlat + "&destlon=" + dlon + "&mode=" + mode} className=" card mt-4 bg-red-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+    <div className="card-body items-center text-center p-2">  
+      {/* <div className=' justify-center items-center'>{getIcon(ins.sign[invrange])}</div>
+      <p className="break-words tracking-tight text-gray-100 dark:text-white">{getSign(ins.sign[invrange])}</p> */}
+      <p className="break-words tracking-tight text-gray-100 dark:text-white">Kembali ke map</p>
+    </div>
+  </a>
+)
+
 dist = distance(Number(currlat),  Number(dlat), Number(currlon), Number(dlon))
 console.log(dist)
 info = <div className="mt-4 justify-center items-center bg-blue-gray-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
@@ -240,6 +252,7 @@ if(dist_ins <= 15){
       <div className=' grid grid-cols-6 justify-center items-center gap-4'>
         <div className=' col-start-1 col-span-2 justify-center items-center ml-2'>{dir}</div>
         <div className=' col-start-1 col-span-2 justify-center items-center ml-2'>{info}</div>
+        <div className=' col-start-1 col-span-2 justify-center items-center ml-2'>{back}</div>
       </div>
       <div className='relative grid justify-center items-center'>
         <div className=' justify-center items-center'>{finish}</div>
