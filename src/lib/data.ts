@@ -22,8 +22,8 @@ export const resto =[
         id_resto: 3,
         nama_resto: "Kantin Informatika ITS",
         alamat: "Jl. Teknik Kimia, Keputih, Sukolilo, Surabaya",
-        lat:-7.280065,
-        lon: 112.796997
+        lat:-7.280084,
+        lon: 112.797003
     },
     {
         id_resto: 4,
