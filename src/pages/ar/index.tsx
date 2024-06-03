@@ -176,7 +176,7 @@ export default function ArPage() {
 let info , finish, dir, dist_ins, back = []
 
 back.push(
-  <a href={"https://hadziq.8thwall.app/siarhalal?destlat=" + dlat + "&destlon=" + dlon + "&mode=" + mode} className=" card mt-4 bg-red-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+  <a href={"https://hadziq.8thwall.app/siarhalal?destlat=" + dlat + "&destlon=" + dlon + "&mode=" + mode} className=" card mt-2 bg-red-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
     <div className="card-body items-center text-center p-2">  
       {/* <div className=' justify-center items-center'>{getIcon(ins.sign[invrange])}</div>
       <p className="break-words tracking-tight text-gray-100 dark:text-white">{getSign(ins.sign[invrange])}</p> */}
@@ -187,7 +187,7 @@ back.push(
 
 dist = distance(Number(currlat),  Number(dlat), Number(currlon), Number(dlon))
 console.log(dist)
-info = <div className="mt-4 justify-center items-center bg-blue-gray-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+info = <div className="mt-2 justify-center items-center bg-blue-gray-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
   <div className="flex justify-center items-center p-2 leading-normal">
     <div className='pr-1'><svg height="20" viewBox="0 0 21 21" width="20" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" transform="translate(4 2) scale(1.1,1.1)"><path d="m6.5 16.5407715c4-4.4500928 6-7.78586659 6-10.00732153 0-3.33218241-2.6862915-6.03344997-6-6.03344997s-6 2.70126756-6 6.03344997c0 2.22145494 2 5.55722873 6 10.00732153z"/><circle cx="6.5" cy="6.5" r="2.5"/></g></svg></div>
     <p className="break-words tracking-tight text-gray-100 dark:text-white">{decimalAdjust("round", dist, -2)} m</p>
@@ -228,6 +228,22 @@ if(dist_ins <= 15){
 </div>
 }
 
+let point, level
+
+point = <div className=" card mt-4 bg-blue-gray-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+<div className="card-body items-center text-center p-2">  
+  <p className="break-words tracking-tight text-gray-100 dark:text-white">0</p>
+  <p className="break-words tracking-tight text-gray-100 dark:text-white">Points</p>
+</div>
+</div>
+
+level = <div className=" card mt-2 bg-blue-gray-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+<div className="card-body items-center text-center p-2">  
+  <p className="break-words tracking-tight text-gray-100 dark:text-white">BASIC</p>
+  <p className="break-words tracking-tight text-gray-100 dark:text-white">Level</p>
+</div>
+</div>
+
   nav.push(
     <a-entity gps-new-entity-place={"latitude:"+currlat+" ; longitude:"+currlon} position='15 0 0' id="nav" look-at={'#target'+idloc} gltf-model={'#panah'} animation-mixer='loop-repeat' scale={'0.1 0.1 0.1'}>
         </a-entity>
@@ -249,9 +265,11 @@ if(dist_ins <= 15){
         {list} 
         {nav}
       </a-scene>
-      <div className=' grid grid-cols-6 justify-center items-center gap-4'>
+      <div className=' grid grid-cols-6 justify-center items-start gap-4'>
         <div className=' col-start-1 col-span-2 justify-center items-center ml-2'>{dir}</div>
+        <div className="col-end-7 col-span-2">{point}</div>
         <div className=' col-start-1 col-span-2 justify-center items-center ml-2'>{info}</div>
+        <div className="col-end-7 col-span-2">{level}</div>
         <div className=' col-start-1 col-span-2 justify-center items-center ml-2'>{back}</div>
       </div>
       <div className='relative grid justify-center items-center'>
