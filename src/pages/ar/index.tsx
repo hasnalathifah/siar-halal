@@ -232,15 +232,15 @@ let point, level
 
 point = <div className=" card mt-4 bg-blue-gray-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
 <div className="card-body items-center text-center p-2">  
-  <p className="break-words tracking-tight text-gray-100 dark:text-white">0</p>
   <p className="break-words tracking-tight text-gray-100 dark:text-white">Points</p>
+  <p className="break-words tracking-tight text-gray-100 dark:text-white">0</p>
 </div>
 </div>
 
 level = <div className=" card mt-2 bg-blue-gray-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
 <div className="card-body items-center text-center p-2">  
-  <p className="break-words tracking-tight text-gray-100 dark:text-white">BASIC</p>
   <p className="break-words tracking-tight text-gray-100 dark:text-white">Level</p>
+  <p className="break-words tracking-tight text-gray-100 dark:text-white">BASIC</p>
 </div>
 </div>
 
@@ -267,9 +267,9 @@ level = <div className=" card mt-2 bg-blue-gray-800 opacity-80 border border-gra
       </a-scene>
       <div className=' grid grid-cols-6 justify-center items-start gap-4'>
         <div className=' col-start-1 col-span-2 justify-center items-center ml-2'>{dir}</div>
-        <div className="col-end-7 col-span-2">{point}</div>
+        <div className="col-end-7 col-span-2 mr-2">{point}</div>
         <div className=' col-start-1 col-span-2 justify-center items-center ml-2'>{info}</div>
-        <div className="col-end-7 col-span-2">{level}</div>
+        <div className="col-end-7 col-span-2 mr-2">{level}</div>
         <div className=' col-start-1 col-span-2 justify-center items-center ml-2'>{back}</div>
       </div>
       <div className='relative grid justify-center items-center'>
