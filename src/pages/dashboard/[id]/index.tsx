@@ -13,19 +13,19 @@ import { stringify } from "querystring";
 import axios from "axios";
 
 
-function setLatlon(data: any, mode: any, dLat: any, dLon: any){
+function setLatlon(data: {}, mode: any, dLat: any, dLon: any){
     let latlon = {}, ins = {}
     let lat = []
     let lon = []
     let inv = []
     let sign = []
-    for (let i = 0; i < data.paths[0].points.coordinates.length; i++) {
-        lon [i] = data.paths[0].points.coordinates[i][0]
-        lat [i] = data.paths[0].points.coordinates[i][1]
+    for (let i = 0; i < data.points.coordinates.length; i++) {
+        lon [i] = data.points.coordinates[i][0]
+        lat [i] = data.points.coordinates[i][1]
     }
-    for (let i = 0; i < data.paths[0].instructions.length; i++) {
-        inv.push(data.paths[0].instructions[i].interval)
-        sign.push(data.paths[0].instructions[i].sign)
+    for (let i = 0; i < data.instructions.length; i++) {
+        inv.push(data.instructions[i].interval)
+        sign.push(data.instructions[i].sign)
         
     }
     localStorage.setItem("lat", JSON.stringify(lat));
@@ -164,7 +164,7 @@ export default function Items() {
     let lon = []
     console.log(resp.length!=0)
     if (resp && resp.length != 0) {
-        data = setLatlon(resp, mode, dLat, dLon)
+        data = setLatlon(resp.paths[0], mode, dLat, dLon)
         console.log(data)
         latlon = data.latlon
         lat = latlon.lat
