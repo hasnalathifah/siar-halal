@@ -162,8 +162,7 @@ export default function Items() {
     let map = []
     let lat = []
     let lon = []
-    console.log(resp.length!=0)
-    if (resp && resp.length != 0) {
+    if (resp.paths[0] != 0 || resp.paths[0] != null) {
         data = setLatlon(resp.paths[0], mode, dLat, dLon)
         console.log(data)
         latlon = data.latlon
