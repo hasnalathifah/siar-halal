@@ -1,32 +1,35 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-
+import { signOut } from "next-auth/react";
+import Image from "next/image";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import NotificationDropdown from "@/components/Dropdowns/NotificationDropdown.js";
 import UserDropdown from "@/components/Dropdowns/UserDropdown.js";
+import { IconButton } from "@material-tailwind/react";
 
 export default function Sidebar() {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
   const router = useRouter();
   return (
     <>
-      <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
+      <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden md:bg-white bg-light-blue-600 flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6">
         <div className=" md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
           {/* Toggler */}
           <button
-            className="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
+            className="cursor-pointer text-white md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
             type="button"
             onClick={() => setCollapseShow("bg-white m-2 py-3 px-6")}
           >
             {/* <i className="fas fa-bars"></i> */}
-            =
+            <Bars3Icon strokeWidth={2} className="h-6 w-6" />
           </button>
           {/* Brand */}
           <Link 
               href="/dashboard"
-              className=" text-blue-600 md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
+              className=" text-white md:block text-left md:pb-2 ml-4 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold px-0"
             >
-              SIARHalal
+             <Image className=" w-auto h-auto" src="/image/logo_siar.png" alt="" width={100} height={20}/>
            
           </Link>
           {/* User */}
@@ -50,9 +53,9 @@ export default function Sidebar() {
               <div className="flex flex-wrap">
                 <div className="w-6/12">
                   <Link href="/dashboard"
-                      className=" text-blue-600 md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
+                      className=" text-light-blue-900 md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
                     >
-                      SIARHalal
+                      <Image className=" w-auto h-auto" src="/image/logo_siar.png" alt="" width={100} height={20}/>
                     
                   </Link>
                 </div>
@@ -63,7 +66,7 @@ export default function Sidebar() {
                     onClick={() => setCollapseShow("hidden")}
                   >
                     {/* <i className="fas fa-times"></i> */}
-                    {'<<'}
+                    <XMarkIcon strokeWidth={2} className="h-6 w-6" />
                   </button>
                 </div>
               </div>
@@ -83,8 +86,8 @@ export default function Sidebar() {
                     className={
                       "text-xs uppercase py-3 font-bold block " +
                       (router.pathname.indexOf("/dashboard") !== -1
-                        ? "text-lightBlue-500 hover:text-lightBlue-600"
-                        : "text-blueGray-700 hover:text-blueGray-500")
+                        ? "text-light-blue-500 hover:text-lightBlue-600"
+                        : "text-blue-gray-700 hover:text-blueGray-500")
                     }
                   >
                     <i
@@ -92,7 +95,7 @@ export default function Sidebar() {
                         "fas fa-tv mr-2 text-sm " +
                         (router.pathname.indexOf("/dashboard") !== -1
                           ? "opacity-75"
-                          : "text-blueGray-300")
+                          : "text-blue-gray-300")
                       }
                     ></i>{" "}
                     Dashboard
@@ -105,8 +108,8 @@ export default function Sidebar() {
                     className={
                       "text-xs uppercase py-3 font-bold block " +
                       (router.pathname.indexOf("/profile") !== -1
-                        ? "text-lightBlue-500 hover:text-lightBlue-600"
-                        : "text-blueGray-700 hover:text-blueGray-500")
+                        ? "text-light-blue-500 hover:text-lightBlue-600"
+                        : "text-blue-gray-700 hover:text-blueGray-500")
                     }
                   >
                     <i
@@ -127,8 +130,8 @@ export default function Sidebar() {
                     className={
                       "text-xs uppercase py-3 font-bold block " +
                       (router.pathname.indexOf("/history") !== -1
-                        ? "text-lightBlue-500 hover:text-lightBlue-600"
-                        : "text-blueGray-700 hover:text-blueGray-500")
+                        ? "text-light-blue-500 hover:text-lightBlue-600"
+                        : "text-blue-gray-700 hover:text-blueGray-500")
                     }
                   >
                     <i
@@ -145,29 +148,29 @@ export default function Sidebar() {
               </li>
 
               <li className="items-center">
-                <Link href="/qrcode"
+                <Link href="/leaderboard"
                     className={
                       "text-xs uppercase py-3 font-bold block " +
-                      (router.pathname.indexOf("/qrcode") !== -1
-                        ? "text-lightBlue-500 hover:text-lightBlue-600"
-                        : "text-blueGray-700 hover:text-blueGray-500")
+                      (router.pathname.indexOf("/leaderboard") !== -1
+                        ? "text-light-blue-500 hover:text-lightBlue-600"
+                        : "text-blue-gray-700 hover:text-blueGray-500")
                     }
                   >
                     <i
                       className={
                         "fas fa-map-marked mr-2 text-sm " +
-                        (router.pathname.indexOf("/qrcode") !== -1
+                        (router.pathname.indexOf("/leaderboard") !== -1
                           ? "opacity-75"
                           : "text-blueGray-300")
                       }
                     ></i>{" "}
-                    Scan QR code
+                    Leaderboard
                    
                 </Link>
               </li>
             </ul>
 
-            <hr className="my-4 md:min-w-full" />
+            {/* <hr className="my-4 md:min-w-full" />
 
             <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
               <li className="items-center">
@@ -179,7 +182,7 @@ export default function Sidebar() {
                    
                 </Link>
               </li>
-            </ul>
+            </ul> */}
 
             {/* Divider */}
             <hr className="my-4 md:min-w-full" />
@@ -191,13 +194,13 @@ export default function Sidebar() {
 
             <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
               <li className="items-center">
-                <Link href="/"
-                    className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+                <button onClick={() => signOut()}
+                    className=" text-red-500 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
                   >
                     <i className="fas fa-fingerprint text-blueGray-400 mr-2 text-sm"></i>{" "}
                     Log Out
                    
-                </Link>
+                </button>
               </li>
 
               {/* <li className="items-center">

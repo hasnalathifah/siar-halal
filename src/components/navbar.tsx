@@ -7,6 +7,7 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 
 const NAV_MENU = ["Home", "About Us", "Contact Us"];
 
@@ -68,7 +69,7 @@ export function Navbar() {
           target="_blank"
           className="text-lg font-bold text-light-blue-700"
           placeholder={""} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}        >
-          SIARHalal
+          <Image className=" w-auto h-auto" src="/image/logo_navbar.png" alt="" width={100} height={20}/>
         </Typography>
         <ul
           className="ml-10 hidden items-center gap-6 lg:flex text-blue-gray-700"

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Image from "next/image";
 import AdminNavbar from "@/components/admnavbar";
 import Sidebar from "@/components/sidebar";
@@ -9,9 +10,10 @@ import { json } from "stream/consumers";
 import { Typography } from "@material-tailwind/react";
 import { Card, CardBody } from "@material-tailwind/react";
 import { stringify } from "querystring";
+import axios from "axios";
 
 
-function setLatlon(data: any, mode: any){
+function setLatlon(data: any, mode: any, dLat: any, dLon: any){
     let latlon = {}, ins = {}
     let lat = []
     let lon = []
@@ -30,7 +32,7 @@ function setLatlon(data: any, mode: any){
     localStorage.setItem("lon", JSON.stringify(lon)); 
     latlon = {lat, lon}
     ins = {inv, sign}
-    return {latlon, ins, mode}
+    return {latlon, ins, mode, dLat, dLon}
 }
 
 export default function Items() {
@@ -44,15 +46,33 @@ export default function Items() {
     const nama = seachParams.get('nama')
     const alamat = seachParams.get('alamat')
     const id = seachParams.get('id')
+    const [review, setReview] = useState([{
+        _id:'',
+        id_user:'',
+        id_resto:'',
+        nama:'',
+        email:'',
+        rating:'',
+        comment:'',
+        date:''
+    }])
     let mode =  seachParams.get('mode')
     if (mode == null){
         mode = "foot"
     }
-    // if (destLat !== null ) data = await getDirections(Number(destLat), Number(destLon))
-
     const [resp, setResp] = useState([]);
-    const [latitude, setLatitude] = useState();
-    const [longitude, setLongitude] = useState();
+    const [latitude, setLatitude] = useState(Number);
+    const [longitude, setLongitude] = useState(Number);
+
+    useEffect(()=>{
+        async function getReview() {
+            const idresto = String(id)
+            const reviews = await axios.post('../api/getreview',{idresto})
+            if(reviews){
+                setReview(reviews.data)
+            }
+        }getReview()
+    },[id])
 
     useEffect(() => {
         if('geolocation' in navigator) {
@@ -60,8 +80,8 @@ export default function Items() {
             navigator.geolocation.getCurrentPosition(({ coords }) => {
                 const lat = coords.latitude;
                 const lon = coords.longitude
-                setLatitude(lat);
-                setLongitude(lon)
+                setLatitude(-7.287591)
+                setLongitude(112.794512)
             })
         }
     }, []);
@@ -143,29 +163,68 @@ export default function Items() {
     let lat = []
     let lon = []
     if (resp.length !== 0) {
-        data = setLatlon(resp, mode)
+        data = setLatlon(resp, mode, dLat, dLon)
         console.log(data)
         latlon = data.latlon
         lat = latlon.lat
         lon = latlon.lon
+        if (mode == "foot") {
+            map.push(
+                <form action={"/dashboard/"+(id)} className="relative flex">
+                    <label htmlFor="mode" className="mr-2">Foot </label>
+                    <input type="radio" name="mode" value={"foot"} className=" mr-4 radio radio-info" defaultChecked />
+                    <label htmlFor="mode" className="mr-2">Bike </label>
+                    <input type="radio" name="mode" value={"bike"} className="mr-4 radio radio-info" />
+                    <label htmlFor="mode" className="mr-2">Car </label>
+                    <input type="radio" name="mode" value={"car"} className="mr-4 radio radio-info"/>
+                    <input type="hidden" name="id" value={id?id:''}/>
+                    <input type="hidden" name="nama" value={nama?nama:''}/>
+                    <input type="hidden" name="alamat" value={alamat?alamat:''}/>
+                    <input type="hidden" name="lat" value={dLat?dLat:''}/>
+                    <input type="hidden" name="lon" value={dLon?dLon:''}/>
+                    <button type="submit" className="text-white end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Pilih</button>
+                </form>
+            )
+        }
+        else if (mode == "bike"){
+            map.push(
+                <form action={"/dashboard/"+(id)} className="relative flex">
+                    <label htmlFor="mode" className="mr-2">Foot </label>
+                    <input type="radio" name="mode" value={"foot"} className=" mr-4 radio radio-info" />
+                    <label htmlFor="mode" className="mr-2">Bike </label>
+                    <input type="radio" name="mode" value={"bike"} className="mr-4 radio radio-info" defaultChecked/>
+                    <label htmlFor="mode" className="mr-2">Car </label>
+                    <input type="radio" name="mode" value={"car"} className="mr-4 radio radio-info"/>
+                    <input type="hidden" name="id" value={id?id:''}/>
+                    <input type="hidden" name="nama" value={nama?nama:''}/>
+                    <input type="hidden" name="alamat" value={alamat?alamat:''}/>
+                    <input type="hidden" name="lat" value={dLat?dLat:''}/>
+                    <input type="hidden" name="lon" value={dLon?dLon:''}/>
+                    <button type="submit" className="text-white end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Pilih</button>
+                </form>
+            )
+        }
+        else if (mode == "car"){
+            map.push(
+                <form action={"/dashboard/"+(id)} className="relative flex">
+                    <label htmlFor="mode" className="mr-2">Foot </label>
+                    <input type="radio" name="mode" value={"foot"} className=" mr-4 radio radio-info" />
+                    <label htmlFor="mode" className="mr-2">Bike </label>
+                    <input type="radio" name="mode" value={"bike"} className="mr-4 radio radio-info" />
+                    <label htmlFor="mode" className="mr-2">Car </label>
+                    <input type="radio" name="mode" value={"car"} className="mr-4 radio radio-info" defaultChecked/>
+                    <input type="hidden" name="id" value={id?id:''}/>
+                    <input type="hidden" name="nama" value={nama?nama:''}/>
+                    <input type="hidden" name="alamat" value={alamat?alamat:''}/>
+                    <input type="hidden" name="lat" value={dLat?dLat:''}/>
+                    <input type="hidden" name="lon" value={dLon?dLon:''}/>
+                    <button type="submit" className="text-white end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Pilih</button>
+                </form>
+            )
+        }
+
         map.push(
-            <form action={"/dashboard/"+(id)} className="relative flex">
-                <select name="mode" id="mode" className="w-full p-2 mb-2 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option selected disabled>Pilih Mode</option>
-                    <option value={"foot"}>Pedestrian</option>
-                    <option value="bike">Bike</option>
-                    <option value="car">Car</option>
-                </select>
-                <input type="hidden" name="id" value={id}/>
-                <input type="hidden" name="nama" value={nama}/>
-                <input type="hidden" name="alamat" value={alamat}/>
-                <input type="hidden" name="lat" value={dLat}/>
-                <input type="hidden" name="lon" value={dLon}/>
-                <button type="submit" className="text-white end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2">Pilih</button>
-            </form>
-        )
-        map.push(
-            <Map lat={lat} lon={lon}/>
+            <Map lat={lat} lon={lon} dest={[Number(dLat),Number(dLon)]}/>
         )
     }
     else{
@@ -177,23 +236,28 @@ export default function Items() {
     let arButton = []
     if (resp.length!=0){
         arButton.push(
-            <Link href={"https://hadziq.8thwall.app/siarhalal?destlat=" + dLat + "&destlon=" + dLon + "&mode=" + mode} type="button" className=" text-center mt-8 relative w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-8 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Mulai navigasi</Link>
-            // <Link href={{pathname: '/ar', query: {str}}} type="button" className=" text-center mt-8 relative w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-8 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Mulai navigasi</Link>
+            <>
+                <Link href={{pathname: '/ar', query: {str}}} type="button" className=" text-center mt-8 relative w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-4 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Mulai navigasi AR</Link>
+                <Link href={"https://hadziq.8thwall.app/siarhalal?destlat=" + dLat + "&destlon=" + dLon + "&mode=" + mode} type="button" className=" text-center relative w-full text-white bg-teal-600 hover:bg-teal-700 focus:ring-4 focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-4 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Mulai navigasi 3D Map</Link>
+            </>
         )
         console.log(resp)
     }
     else{
         arButton.push(
-            <button className=" text-center mt-8 relative w-full text-white bg-blue-100 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-8 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Mulai navigasi</button>
+            <>
+                <button className=" text-center mt-8 relative w-full text-white bg-blue-100 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-8 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Mulai navigasi AR</button>
+                <button className=" text-center relative w-full text-white bg-teal-100 focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-8 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Mulai navigasi 3D Map</button>
+            </>
         )
     }
 
     
     return (
-        <div className=" bg-blue-gray-50">
+        <div data-theme="light" className=" min-h-screen bg-light-blue-50">
             <Sidebar/>
             <div className="relative min-w-full grid place-items-start justify-center gap-2 ">
-                <div className="divide-y place-items-center divide-blue-gray-100">
+                <div className="divide-y place-items-center ml-8 mr-8 divide-blue-gray-100">
                     <div className="relative grid mt-8  place-items-start justify-center gap-2">
                         {/* <input value={"Perum ITS Jl. Teknik Sipil W20"} type="text" id="disabled_standard" className="block w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " disabled /> */}
                         {/* <label htmlFor="disabled_standard" className="relative text-sm text-black dark:text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">Lokasi asal</label> */}
@@ -206,9 +270,9 @@ export default function Items() {
                         </Link>    
                         {map}
                         {arButton}
-                        <Link href="/dashboard" type="button" className=" text-center relative w-full text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-8 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">Batalkan</Link>
+                        <Link href="/dashboard" type="button" className=" text-center relative w-full text-red-600 bg-transparent hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-8 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">Batalkan</Link>
                     </div>
-                    <div className="relative grid place-items-start justify-center  mt-1">
+                    {/* <div className="relative grid place-items-start justify-center  mt-1">
                         <div className=" mt-7 mb-7 w-full">
                             <div className="w-full max-w-md p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
                                 <div className="flex items-center justify-between mb-4">
@@ -336,14 +400,16 @@ export default function Items() {
                             </div>
 
                         </div>
-                    </div>
-                    <div className="relative grid place-items-start justify-center  mt-1">
-                        <div className=" mt-2 mb-7 w-full">
-                            <div className=" relative mt-6 p-4 w-full flex flex-row items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl">
+                    </div> */}
+                    <div className="p-2 relative grid place-items-start justify-center  mt-1">
+                        <Typography placeholder={""} variant="h4" className=" mt-2 text-blue-gray-700" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}> Ulasan Pelanggan</Typography>
+                        <div className=" mt-1 mb-7 w-full">
+                            {(review)?review.map((review)=>(
+                                <div key={review._id} className=" relative mt-2 p-4 w-full flex flex-row items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl">
                                 <Card
                                     shadow={false}
                                     color="transparent"
-                                    className="grid items-center gap-6 " placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}
+                                    className="grid items-center gap-6 pr-8 " placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}
                                 >
                                     <CardBody className="p-0 gap-5 flex " placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
                                     <div className=" !m-0 h-full  w-full  max-h-[40px] max-w-[40px] ">
@@ -356,96 +422,53 @@ export default function Items() {
                                         />
                                     </div>
                                     <div>
-                                        <div className="flex gap-1 mb-3 items-center">
+                                        <div className="flex gap-1 mb-1 items-center">
                                         <Typography
                                             variant="small"
                                             className=" font-bold flex items-center gap-2 !text-gray-900" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}
                                         >
-                                            Hasna Lathifah
+                                            {review.nama}
                                         </Typography>
                                         <Typography variant="small" className="font-medium !text-gray-500" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
-                                            2 hours ago
+                                            {review.date}
                                         </Typography>
                                         </div>
                                         <div className="flex gap-1 mb-3 items-center">
-                                        <table>
-                                            <tbody>
-                                            <tr>
-                                                <th>
-                                                <Typography className="w-full font-normal !text-gray-500" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
-                                                    Makanan
-                                                </Typography>
-                                                </th>
-                                                <td className="px-6">
-                                                <div className="rating">
-                                                    <input disabled type="radio" name="makanan" className="mask mask-star-2 bg-orange-400" />
-                                                    <input disabled type="radio" name="makanan" className="mask mask-star-2 bg-orange-400" />
-                                                    <input disabled type="radio" name="makanan" className="mask mask-star-2 bg-orange-400" />
-                                                    <input disabled type="radio" name="makanan" className="mask mask-star-2 bg-orange-400" checked />
-                                                    <input disabled type="radio" name="makanan" className="mask mask-star-2 bg-orange-400" />
-                                                </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                <Typography className="w-full font-normal !text-gray-500" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
-                                                    Pelayanan
-                                                </Typography>
-                                                </th>
-                                                <td className="px-6">
-                                                <div className="rating">
-                                                    <input disabled type="radio" name="Pelayanan" className="mask mask-star-2 bg-orange-400" />
-                                                    <input disabled type="radio" name="Pelayanan" className="mask mask-star-2 bg-orange-400" />
-                                                    <input disabled type="radio" name="Pelayanan" className="mask mask-star-2 bg-orange-400" />
-                                                    <input disabled type="radio" name="Pelayanan" className="mask mask-star-2 bg-orange-400" />
-                                                    <input disabled type="radio" name="Pelayanan" className="mask mask-star-2 bg-orange-400" checked/>
-                                                </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <th>
-                                                <Typography className="w-full font-normal !text-gray-500" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
-                                                    Kebersihan
-                                                </Typography>
-                                                </th>
-                                                <td className="px-6">
-                                                <div className="rating">
-                                                    <input disabled type="radio" name="kebersihan" className="mask mask-star-2 bg-orange-400" />
-                                                    <input disabled type="radio" name="kebersihan" className="mask mask-star-2 bg-orange-400" />
-                                                    <input disabled type="radio" name="kebersihan" className="mask mask-star-2 bg-orange-400" checked />
-                                                    <input disabled type="radio" name="kebersihan" className="mask mask-star-2 bg-orange-400" />
-                                                    <input disabled type="radio" name="kebersihan" className="mask mask-star-2 bg-orange-400" />
-                                                </div>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
+                                        <Typography variant="small" className="font-medium !text-gray-500" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                                            {review.email}
+                                        </Typography>
                                         </div>
-                                        <div className="flex gap-1 mt-8 mb-3 items-center">  
-                                        <Typography className="w-full font-normal mb-4 !text-gray-500" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                        <div className="flex gap-1 mt-4 mb-3 items-center">
+                                            <div className="rating">
+                                                <input disabled type="radio" name="makanan" className="mask mask-star-2 bg-orange-400" checked={(review.rating=='1')?true:false}/>
+                                                <input disabled type="radio" name="makanan" className="mask mask-star-2 bg-orange-400" checked={(review.rating=='2')?true:false} />
+                                                <input disabled type="radio" name="makanan" className="mask mask-star-2 bg-orange-400" checked={(review.rating=='3')?true:false} />
+                                                <input disabled type="radio" name="makanan" className="mask mask-star-2 bg-orange-400" checked={(review.rating=='4')?true:false} />
+                                                <input disabled type="radio" name="makanan" className="mask mask-star-2 bg-orange-400" checked={(review.rating=='5')?true:false} />
+                                            </div>
+                                        </div>
+                                        <div className="flex gap-1 mb-3 items-center">  
+                                        <Typography className="w-full mt-4 font-normal mb-4 !text-gray-500" placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                                            {review.comment}
                                         </Typography>          
-                                        </div>
-                                        <div className="flex gap-1 items-center">              
-                                            <Image
-                                            width={200}
-                                            height={200}
-                                            src={'/image/food.jpg'}
-                                            alt="img"
-                                            className="h-full rounded w-200 object-cover object-center"
-                                            />
                                         </div>
                                     </div>
                                     </CardBody>
                                 </Card>
                             </div>
+                            ))
+                            :
+                            <div className=" items-center justify-center">
+                                <Typography placeholder={""} variant="h5" className=" mt-2 text-blue-gray-700" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>Belum ada review</Typography>
+                            </div>
+                            }
+                            
 
                         </div>
                     </div>
                 </div>
                 
             </div>
-            
         </div>
     );
 }

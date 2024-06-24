@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client';
 
 import * as React from 'react';
@@ -5,6 +6,9 @@ import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
+import axios from 'axios';
+import router from 'next/router';
 // import {lookAt} from '@/pages/ar/component/look-at';
 
 // if (typeof window != undefined){
@@ -34,7 +38,7 @@ function getIcon(n: number){
 function distance(lat1: number,
   lat2: number, lon1: number, lon2: number)
 {
-  console.log('dlat on distance : '+lat2)
+  // console.log('dlat on distance : '+lat2)
 
 // The math module contains a function
 // named toRadians which converts from
@@ -53,7 +57,7 @@ let a = Math.pow(Math.sin(dlat / 2), 2)
 
 let c = 2 * Math.asin(Math.sqrt(a));
 
-console.log('c : '+c)
+// console.log('c : '+c)
 
 // Radius of earth in kilometers. Use 3956 
 // for miles
@@ -85,11 +89,20 @@ function decimalAdjust(type: string, value: unknown, exp: number) {
 }
 
 export default function ArPage() {
-  const [currlat, setCurrlat] = useState();
-  const [currlon, setCurrlon] = useState();
+  const { data }: any = useSession()
+  const [currlat, setCurrlat] = useState(Number);
+  const [currlon, setCurrlon] = useState(Number);
   const [invrange, setInvrange] = useState(Number);
+  const [email, setEmail] = useState()
+  const [idrest, setIdrest] = useState()
+  const [week, setWeek] = useState()
+  const [month, setMonth] = useState()
+  const [points, setPoints] = useState()
+  const [level, setLevel] = useState()
+  const [resto, setResto] = useState()
+  // console.log(data)
 
-  let get, latlon, data, inv, sign, ins, mode
+  let get, latlon, resp, inv, sign, ins, mode, reslat: Number, reslon:Number
   let lat,lon
 
   const seachParams = useSearchParams()
@@ -98,21 +111,26 @@ export default function ArPage() {
   lon = 112.797000
   inv = [0, 0]
   sign = 0
-  data = JSON.parse(get)
+  reslat = 0
+  reslon = 0
+
+  resp = JSON.parse(get?get:"")
 
   let list = []
  
-  if(data !== null){
-    lat = data.latlon.lat;
-    lon = data.latlon.lon;
-    ins = data.ins
-    mode = data.mode
+  if(resp !== null){
+    lat = resp.latlon.lat;
+    lon = resp.latlon.lon;
+    ins = resp.ins
+    mode = resp.mode
+    reslat = resp.dLat
+    reslon = resp.dLon
   }
   else{
     latlon = {lat, lon}
     ins = {inv, sign}
   }
-  
+  // console.log(reslat,reslon)
   // console.log(lat);
   // console.log(lon);
   let nav = []
@@ -128,7 +146,7 @@ export default function ArPage() {
         if(i == ins.inv[j][0]){
           pointlat[j] = lat[i]
           pointlon[j] = lon[i]
-          console.log(lat[i])
+          // console.log(lat[i])
         }
         
       }
@@ -157,20 +175,74 @@ export default function ArPage() {
       }
       
   };
-  console.log('dlat: '+dlat)
+
+  // console.log('dlat: '+dlat)
   useEffect(() => {
     if('geolocation' in navigator) {
         // Retrieve latitude & longitude coordinates from `navigator.geolocation` Web API
         navigator.geolocation.watchPosition(({ coords }) => {
             const srclat = coords.latitude;
             const srclon = coords.longitude
-            setCurrlat(srclat);
-            setCurrlon(srclon);
-            console.log(coords.latitude)
+            setCurrlat(-7.287591)
+            setCurrlon(112.794512);
+            // console.log(coords.latitude)
         })
     }
 }, [dlat, dlon]);
 
+useEffect(()=> {
+  async function getUser() {
+    if(data){
+        try {
+            const id = data.user._id
+            const response = await axios.post("/api/users/find", {id});
+            if (response) {
+                setEmail (response.data.email)
+                setWeek(response.data.gamification.mission.week)
+                setMonth(response.data.gamification.mission.month)
+                setPoints(response.data.gamification.points)
+                setLevel(response.data.gamification.level)
+                // setBadge(response.data.gamification.badge)
+                // console.log(week)
+                const resp = await axios.post("/api/getresto", {reslat, reslon});
+                if (resp) {
+                  setIdrest(resp.data[0]._id)
+                  setResto(resp.data[0].nama_resto)
+                // console.log(idrest)
+                }
+            }
+            else console.log("null")
+        } catch (e) {
+            console.log("error");
+        }
+    }
+    else console.log("kosong")
+}getUser()
+}, [data, email, idrest, reslat, reslon])
+// console.log(email)
+const onFinished = async () => {
+  try {
+    // const email_ = email
+    const id = data.user._id
+    const hist = await axios.post("/api/findhistory", {id, idrest, resto});
+    // console.log(hist)
+    if (hist.data == "kosong"){
+      const response = await axios.post("/api/addpoint", {email});
+      console.log(response)
+      // if (response.status == 200 ) router.push("/finish?id="+id+"&idrest="+idrest+"&email="+email);
+      if (response.status == 200 ){
+        const mission = await axios.post("/api/mission", {id, idrest, email, week, month});
+        const message = mission.data
+        if (mission.status == 200 ) router.push("/finish?message="+message+"&email="+email+"&level="+level);
+      }
+    } 
+    else if (hist.data == "ada"){
+      router.push("/dashboard");
+    }
+  } catch (error:any) {
+      console.log(error.message);
+  }
+}
 
 
 let info , finish, dir, dist_ins, back = []
@@ -186,7 +258,8 @@ back.push(
 )
 
 dist = distance(Number(currlat),  Number(dlat), Number(currlon), Number(dlon))
-console.log(dist)
+// console.log("dlat: "+dlat)
+// console.log("dlon: "+dlon)
 info = <div className="mt-2 justify-center items-center bg-blue-gray-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
   <div className="flex justify-center items-center p-2 leading-normal">
     <div className='pr-1'><svg height="20" viewBox="0 0 21 21" width="20" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" transform="translate(4 2) scale(1.1,1.1)"><path d="m6.5 16.5407715c4-4.4500928 6-7.78586659 6-10.00732153 0-3.33218241-2.6862915-6.03344997-6-6.03344997s-6 2.70126756-6 6.03344997c0 2.22145494 2 5.55722873 6 10.00732153z"/><circle cx="6.5" cy="6.5" r="2.5"/></g></svg></div>
@@ -198,7 +271,7 @@ if(dist < 20){
   finish= <div className=" mt-72 w-full flex flex-row items-center bg-blue-gray-700 opacity-90 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
   <div className="flex flex-col justify-between p-4 leading-normal">
       <p className=" mb-2 break-words font-bold tracking-tight text-gray-100 dark:text-white">Anda telah sampai di tujuan</p>
-      <Link href='/dashboard' type='button' className=' text-center relative text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none'>Selesai</Link>
+      <button onClick={(onFinished)} className=' text-center relative text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none'>Selesai</button>
   </div>
 </div>
 }
@@ -228,21 +301,21 @@ if(dist_ins <= 15){
 </div>
 }
 
-let point, level
+// let point, level
 
-point = <div className=" card mt-4 bg-blue-gray-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-<div className="card-body items-center text-center p-2">  
-  <p className="break-words tracking-tight text-gray-100 dark:text-white">Points</p>
-  <p className="break-words tracking-tight text-gray-100 dark:text-white">0</p>
-</div>
-</div>
+// point = <div className=" card mt-4 bg-blue-gray-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+// <div className="card-body items-center text-center p-2">  
+//   <p className="break-words tracking-tight text-gray-100 dark:text-white">Points</p>
+//   <p className="break-words tracking-tight text-gray-100 dark:text-white">0</p>
+// </div>
+// </div>
 
-level = <div className=" card mt-2 bg-blue-gray-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-<div className="card-body items-center text-center p-2">  
-  <p className="break-words tracking-tight text-gray-100 dark:text-white">Level</p>
-  <p className="break-words tracking-tight text-gray-100 dark:text-white">BASIC</p>
-</div>
-</div>
+// level = <div className=" card mt-2 bg-blue-gray-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+// <div className="card-body items-center text-center p-2">  
+//   <p className="break-words tracking-tight text-gray-100 dark:text-white">Level</p>
+//   <p className="break-words tracking-tight text-gray-100 dark:text-white">BASIC</p>
+// </div>
+// </div>
 
   nav.push(
     <a-entity gps-new-entity-place={"latitude:"+currlat+" ; longitude:"+currlon} position='15 0 0' id="nav" look-at={'#target'+idloc} gltf-model={'#panah'} animation-mixer='loop-repeat' scale={'0.1 0.1 0.1'}>
@@ -267,9 +340,9 @@ level = <div className=" card mt-2 bg-blue-gray-800 opacity-80 border border-gra
       </a-scene>
       <div className=' grid grid-cols-6 justify-center items-start gap-4'>
         <div className=' col-start-1 col-span-2 justify-center items-center ml-2'>{dir}</div>
-        <div className="col-end-7 col-span-2 mr-2">{point}</div>
+        {/* <div className="col-end-7 col-span-2 mr-2">{point}</div> */}
         <div className=' col-start-1 col-span-2 justify-center items-center ml-2'>{info}</div>
-        <div className="col-end-7 col-span-2 mr-2">{level}</div>
+        {/* <div className="col-end-7 col-span-2 mr-2">{level}</div> */}
         <div className=' col-start-1 col-span-2 justify-center items-center ml-2'>{back}</div>
       </div>
       <div className='relative grid justify-center items-center'>
@@ -278,5 +351,3 @@ level = <div className=" card mt-2 bg-blue-gray-800 opacity-80 border border-gra
     </body>
   );
 }
-
-

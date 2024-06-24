@@ -1,34 +1,59 @@
-"use client";
+import clientPromise from "../../lib/mongodb";
+import { GetServerSideProps } from 'next';
 
-import { Form } from "@/components/form";
-// import Image from "next/image";
-import AdminNavbar from "@/components/admnavbar";
-import CardComp from "@/components/cardcomp";
-import Sidebarowner from "@/components/sidebarowner";
-// import Card from "@/components/card";
-// import { getResto } from "../lib/data";
 
-// async function CardComp() {
-//     const resto = await getResto()
-//     return(
-//         <Card resto = {resto}/>
-//     );
-// }
-
-export default function Dashboard() {
-  const url = 'https://example.com/posts?page=5&sort=desc#hash';
-  const urlObj = new URL(url);
-  console.log(urlObj.search); // ?page=5&sort=desc
-    return (
-      <>
-        <Sidebarowner/>
-        {/* <AdminNavbar/> */}
-        <div className="relative min-h-screen grid place-items-start justify-center gap-2 ">
-          {/* <div className="divide-y divide-blue-gray-100"> */}
-          <div className="relative grid mt-8 place-items-center justify-center gap-2">
-            
-          </div>
-        </div>
-      </>
-    );
+interface Movie {
+   _id: string;
+   title: string;
+   metacritic: number;
+   plot: string;
 }
+
+
+interface MoviesProps {
+   movies: Movie[];
+}
+
+
+const Movies: React.FC<MoviesProps> = ({ movies }) => {
+   return (
+       <div>
+           <h1>Top 20 Movies of All Time</h1>
+           <p>
+               <small>(According to Metacritic)</small>
+           </p>
+           <ul>
+               {movies.map((movie) => (
+                   <li key={movie._id}>
+                       <h2>{movie.title}</h2>
+                       <h3>{movie.metacritic}</h3>
+                       <p>{movie.plot}</p>
+                   </li>
+               ))}
+           </ul>
+       </div>
+   );
+};
+
+
+export default Movies;
+
+
+export const getServerSideProps: GetServerSideProps = async () => {
+   try {
+       const client = await clientPromise;
+       const db = client.db("sample_mflix");
+       const movies = await db
+           .collection("movies")
+           .find({})
+           .sort({ metacritic: -1 })
+           .limit(20)
+           .toArray();
+       return {
+           props: { movies: JSON.parse(JSON.stringify(movies)) },
+       };
+   } catch (e) {
+       console.error(e);
+       return { props: { movies: [] } };
+   }
+};
