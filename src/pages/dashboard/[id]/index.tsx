@@ -80,8 +80,8 @@ export default function Items() {
             navigator.geolocation.getCurrentPosition(({ coords }) => {
                 const lat = coords.latitude;
                 const lon = coords.longitude
-                setLatitude(-7.287591)
-                setLongitude(112.794512)
+                setLatitude(lat)
+                setLongitude(lon)
             })
         }
     }, []);
@@ -162,7 +162,8 @@ export default function Items() {
     let map = []
     let lat = []
     let lon = []
-    if (resp.length !== 0) {
+    console.log(resp.length!=0)
+    if (resp.length != 0) {
         data = setLatlon(resp, mode, dLat, dLon)
         console.log(data)
         latlon = data.latlon

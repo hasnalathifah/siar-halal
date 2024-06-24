@@ -56,7 +56,7 @@ export default function MyMap(props){
  for (let i = 0; i < pinpoint.length; i++) {
   if (JSON.stringify(props.dest)!==JSON.stringify(pinpoint[i])){
     marker.push(
-      <Marker position={pinpoint[i]} icon={pinIcon}>
+      <Marker key={i} position={pinpoint[i]} icon={pinIcon}>
         <Popup>
           A pretty CSS3 popup. <br /> Easily customizable.
         </Popup>

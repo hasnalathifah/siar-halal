@@ -183,8 +183,8 @@ export default function ArPage() {
         navigator.geolocation.watchPosition(({ coords }) => {
             const srclat = coords.latitude;
             const srclon = coords.longitude
-            setCurrlat(-7.287591)
-            setCurrlon(112.794512);
+            setCurrlat(srclat)
+            setCurrlon(srclon);
             // console.log(coords.latitude)
         })
     }
