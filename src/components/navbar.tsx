@@ -8,6 +8,7 @@ import {
 } from "@material-tailwind/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
+import Link from "next/link";
 
 const NAV_MENU = ["Home", "About Us", "Contact Us"];
 
@@ -79,14 +80,14 @@ export function Navbar() {
           ))}
         </ul>
         <div className="hidden items-center gap-2 lg:flex">
-          <a href="/login">
+          <Link href="/login">
             <Button placeholder={""} variant="text" color="light-blue" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
               Log in
             </Button>
-          </a>
-          <a href="/login" target="_blank">
+          </Link>
+          <Link href="/signup" target="_blank">
             <Button placeholder={""} className=" bg-light-blue-800" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>Register</Button>
-          </a>
+          </Link>
         </div>
         <IconButton
           variant="text"
@@ -112,12 +113,12 @@ export function Navbar() {
             ))}
           </ul>
           <div className="mt-6 flex items-center gap-2">
-            <a href="/login">
+            <Link href="/login">
               <Button placeholder={""} variant="text" color="light-blue" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>Log in</Button>
-            </a>
-            <a href="/login" target="_blank">
+            </Link>
+            <Link href="/signup" target="_blank">
               <Button placeholder={""} className=" bg-light-blue-800" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>Register</Button>
-            </a>
+            </Link>
           </div>
         </div>
       </Collapse>
