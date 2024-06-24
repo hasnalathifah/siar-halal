@@ -114,7 +114,7 @@ export default function ArPage() {
   reslat = 0
   reslon = 0
 
-  resp = JSON.parse(get?get:"")
+  resp = JSON.parse(get)
 
   let list = []
  
