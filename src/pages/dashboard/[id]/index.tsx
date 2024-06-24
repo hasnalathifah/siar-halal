@@ -163,7 +163,7 @@ export default function Items() {
     let lat = []
     let lon = []
     console.log(resp.length!=0)
-    if (resp.length != 0) {
+    if (resp && resp.length != 0) {
         data = setLatlon(resp, mode, dLat, dLon)
         console.log(data)
         latlon = data.latlon
