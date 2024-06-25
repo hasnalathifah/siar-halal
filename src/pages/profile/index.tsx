@@ -36,11 +36,13 @@ export default function Profile(){
               let pwd = user.password
               if(nama == "") nama = data.user.nama
               if(email == "") email = data.user.email
-              if(pwd == "") pwd = data.user.pwd
               console.log({id, nama, email, pwd})
               const response = await axios.post("/api/users/update", {id,nama,email,pwd});
               console.log(response)
-              if (response.status == 200 )router.refresh();
+              if (response.data == "email already exist"){
+                alert("email already exist")
+              }
+              else router.refresh();
             }
             
         } catch (error:any) {

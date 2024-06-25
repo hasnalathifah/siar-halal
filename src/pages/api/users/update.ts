@@ -19,7 +19,26 @@ export default async function POST (req: NextApiRequest, res: NextApiResponse) {
       const hashedPassword = await bcryptjs.hash(pwd, salt)
       
       try {
-        const update = await db
+        const find = await db
+          .collection("user")
+          .findOne({email})
+        if (find) return res.status(200).json("email already exist")
+        else if(pwd == "" || pwd==null){
+          const update = await db
+          .collection("user")
+          .updateOne({_id},
+            {
+              $set: {
+                nama: nama,
+                email: email
+              },
+              $currentDate: { lastUpdated: true }
+            }
+          )
+          return res.status(200).json(update)
+        }
+        else{
+          const update = await db
           .collection("user")
           .updateOne({_id},
             {
@@ -31,7 +50,8 @@ export default async function POST (req: NextApiRequest, res: NextApiResponse) {
               $currentDate: { lastUpdated: true }
             }
           )
-        return res.status(200).json(update)
+          return res.status(200).json(update)
+        }
       } catch (error) {
         console.log(error)
         return res.status(500).json({error})
