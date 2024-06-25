@@ -36,7 +36,7 @@ export default function Profile(){
               let pwd = user.password
               if(nama == "") nama = data.user.nama
               if(email == "") email = data.user.email
-              if(password == "") pwd = data.user.pwd
+              if(pwd == "") pwd = data.user.pwd
               console.log({id, nama, email, pwd})
               const response = await axios.post("/api/users/update", {id,nama,email,pwd});
               console.log(response)
