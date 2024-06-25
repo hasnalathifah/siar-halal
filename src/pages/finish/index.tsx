@@ -58,13 +58,13 @@ export default function Finish() {
       if(response.data.level && response.data.badge) {
         const level = response.data.level
         const badge = response.data.badge
-        router.push("http://localhost:3000/dashboard?level="+level+"&badge="+badge)
+        router.push("https://siar-halal.vercel.app/dashboard?level="+level+"&badge="+badge)
       }
       else if(response.data.level) {
         const level = response.data.level
-        router.push("http://localhost:3000/dashboard?level="+level)
+        router.push("https://siar-halal.vercel.app/dashboard?level="+level)
       }
-      else router.push("/dashboard")
+      else router.push("https://siar-halal.vercel.app/dashboard")
     } catch (error:any) {
         console.log(error.message);
     }

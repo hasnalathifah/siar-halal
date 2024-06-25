@@ -245,14 +245,23 @@ const onFinished = async () => {
 }
 
 
-let info , finish, dir, dist_ins, back = []
+let info , finish, dir, dist_ins, mapmode = [], back = []
 
-back.push(
-  <a href={"https://hadziq.8thwall.app/siarhalal?destlat=" + dlat + "&destlon=" + dlon + "&mode=" + mode} className=" card mt-2 bg-red-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+mapmode.push(
+  <a href={"https://hadziq.8thwall.app/siarhalal?destlat=" + dlat + "&destlon=" + dlon + "&mode=" + mode} className=" card mt-2 bg-teal-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
     <div className="card-body items-center text-center p-2">  
       {/* <div className=' justify-center items-center'>{getIcon(ins.sign[invrange])}</div>
       <p className="break-words tracking-tight text-gray-100 dark:text-white">{getSign(ins.sign[invrange])}</p> */}
-      <p className="break-words tracking-tight text-gray-100 dark:text-white">Kembali ke map</p>
+      <p className="break-words tracking-tight text-gray-100 dark:text-white">Mode 3D Map</p>
+    </div>
+  </a>
+)
+back.push(
+  <a href={"https://siar-halal.vercel.app/dashboard"} className=" card mt-2 bg-red-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+    <div className="card-body items-center text-center p-2">  
+      {/* <div className=' justify-center items-center'>{getIcon(ins.sign[invrange])}</div>
+      <p className="break-words tracking-tight text-gray-100 dark:text-white">{getSign(ins.sign[invrange])}</p> */}
+      <p className="break-words tracking-tight text-gray-100 dark:text-white">Batalkan</p>
     </div>
   </a>
 )
@@ -343,6 +352,7 @@ if(dist_ins <= 15){
         {/* <div className="col-end-7 col-span-2 mr-2">{point}</div> */}
         <div className=' col-start-1 col-span-2 justify-center items-center ml-2'>{info}</div>
         {/* <div className="col-end-7 col-span-2 mr-2">{level}</div> */}
+        <div className=' col-start-1 col-span-2 justify-center items-center ml-2'>{mapmode}</div>
         <div className=' col-start-1 col-span-2 justify-center items-center ml-2'>{back}</div>
       </div>
       <div className='relative grid justify-center items-center'>
