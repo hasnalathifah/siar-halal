@@ -108,19 +108,19 @@ export default function Dashboard() {
     }, [data, user, mission, yesterday])
     let image
     if (info.badge=="BASIC") {
-        image = <Image className="object-cover rounded-full" src="/image/basic.png" alt="" width={60} height={50}/>
+        image = <Image className="object-cover rounded-full" src="/image/basic.png" alt="" width={30} height={30}/>
     }
     else if (info.badge=="EXPLORER") {
-        image = <Image className="object-cover rounded-full" src="/image/explorer.png" alt="" width={60} height={50}/>
+        image = <Image className="object-cover rounded-full" src="/image/explorer.png" alt="" width={40} height={40}/>
     }
     else if (info.badge=="ADVANCED") {
-        image = <Image className="object-cover rounded-full" src="/image/advanced.png" alt="" width={60} height={50}/>
+        image = <Image className="object-cover rounded-full" src="/image/advanced.png" alt="" width={40} height={40}/>
     }
     else if (info.badge=="PRO") {
-        image = <Image className="object-cover rounded-full" src="/image/pro.png" alt="" width={60} height={50}/>
+        image = <Image className="object-cover rounded-full" src="/image/pro.png" alt="" width={40} height={40}/>
     }
     else if (info.badge=="MAASTER") {
-        image = <Image className="object-cover rounded-full" src="/image/master.png" alt="" width={60} height={50}/>
+        image = <Image className="object-cover rounded-full" src="/image/master.png" alt="" width={40} height={40}/>
     }
     async function search() {
         setIssearch(true)
@@ -160,7 +160,7 @@ export default function Dashboard() {
                         <div className=" border-y-4 border-white relative flex flex-col items-center justify-center mb-4 px-8">
                             <div className=" mt-4 mb-2 flex items-center justify-center">
                                {info?image:''}
-                                <h6 className=" text-white ml-4 mt-4 text-xl font-bold">{ info? info.badge : ""}</h6>
+                                <h5 className=" text-white ml-2 text-xl font-bold">{ info? info.badge : ""}</h5>
                             </div>
                             
                             <div className=" place-content-start mb-4">
