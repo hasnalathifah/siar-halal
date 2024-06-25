@@ -29,7 +29,7 @@ export default function Sidebar() {
               href="/dashboard"
               className=" text-white md:block text-left md:pb-2 ml-4 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold px-0"
             >
-             <Image className=" w-auto h-auto" src="/image/logo_siar.png" alt="" width={100} height={20}/>
+             <Image className=" w-auto h-auto" src="/image/logo_siar.png" alt="" width={65} height={13}/>
            
           </Link>
           {/* User */}
