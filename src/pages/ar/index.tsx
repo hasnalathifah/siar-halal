@@ -277,7 +277,7 @@ info = <div className="mt-2 justify-center items-center bg-blue-gray-800 opacity
 </div>
 
 if(dist < 20){
-  finish= <div className=" mt-72 w-full flex flex-row items-center bg-blue-gray-700 opacity-90 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+  finish= <div className=" w-full flex flex-row items-center bg-blue-gray-700 opacity-90 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
   <div className="flex flex-col justify-between p-4 leading-normal">
       <p className=" mb-2 break-words font-bold tracking-tight text-gray-100 dark:text-white">Anda telah sampai di tujuan</p>
       <button onClick={(onFinished)} className=' text-center relative text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none'>Selesai</button>
@@ -347,7 +347,7 @@ if(dist_ins <= 15){
         {list} 
         {nav}
       </a-scene>
-      <div className=' grid grid-cols-6 justify-center items-start gap-4'>
+      <div className=' grid grid-cols-6 mb-20 justify-center items-start gap-4'>
         <div className=' col-start-1 col-span-2 justify-center items-center ml-2'>{dir}</div>
         {/* <div className="col-end-7 col-span-2 mr-2">{point}</div> */}
         <div className=' col-start-1 col-span-2 justify-center items-center ml-2'>{info}</div>
