@@ -19,7 +19,7 @@ function Hero() {
             placeholder={""} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}        >
           Memperkenalkan aplikasi navigasi tempat makan halal dengan teknologi Augmented Reality
         </Typography>
-        <Link href="/dashboard" type="button" className="relative text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-8 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Mulai sekarang</Link>
+        <Link href="/login" type="button" className="relative text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-8 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Mulai sekarang</Link>
       </div>
       
     </div>
