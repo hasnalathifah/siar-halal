@@ -153,7 +153,7 @@ export default function Items() {
            
             // }
         };
-        if (dLat !== null && latitude !== undefined)getDirections()
+        if (Number(dLat)!=0 && Number(latitude)!=0)getDirections()
     }, [dLat, dLon, latitude, longitude, mode]);
 
     // console.log(resp)
