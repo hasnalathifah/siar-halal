@@ -13,6 +13,7 @@ export default function Dashboard() {
     const level = seachParams.get('level')
     const badge = seachParams.get('badge')
     const { data }: any = useSession();
+    const user_id = data.user._id
     const [user, setUser] = useState(Object);
     const [info, setInfo] = useState(Object);
     const [mission, setMission] = useState(Object);
@@ -220,7 +221,7 @@ export default function Dashboard() {
                     </div>
                     {issearch?result.map((result,index)=>(
                         <div key={result._id}>
-                        <a href={'dashboard/'+(index+1)+'?id='+(result._id)+'&nama='+(result.nama_resto)+'&alamat='+(result.alamat)+'&lat='+(result.lat)+'&lon='+(result.lon)} className=" w-full flex flex-row items-center bg-white border border-gray-200 rounded-full shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+                        <a href={'dashboard/'+(index+1)+'?id='+(result._id)+'&user_id='+(user_id)+'&nama='+(result.nama_resto)+'&alamat='+(result.alamat)+'&lat='+(result.lat)+'&lon='+(result.lon)} className=" w-full flex flex-row items-center bg-white border border-gray-200 rounded-full shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
                             <Image className="object-cover ml-2 rounded-full" src="/image/logo_resto.png" alt="" width={100} height={100}/>
                             <div className="flex flex-col justify-between p-4 leading-normal">
                               <p className="mb-2 font-bold tracking-tight text-gray-900 dark:text-white">{result.nama_resto}</p>

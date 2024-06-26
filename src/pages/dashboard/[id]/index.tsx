@@ -36,8 +36,6 @@ function setLatlon(data: {}, mode: any, dLat: any, dLon: any, user_id:any){
 }
 
 export default function Items() {
-    const { data }: any = useSession()
-    const user_id = data.user._id
     const seachParams = useSearchParams()
     const dLat = seachParams.get('lat')
     const dLon = seachParams.get('lon')
@@ -47,6 +45,7 @@ export default function Items() {
     const nama = seachParams.get('nama')
     const alamat = seachParams.get('alamat')
     const id = seachParams.get('id')
+    const user_id = seachParams.get('user_id')
     const [review, setReview] = useState([{
         _id:'',
         id_user:'',
@@ -159,7 +158,7 @@ export default function Items() {
 
     // console.log(resp)
 
-    let latlon = {}, data_ = {}
+    let latlon = {}, data = {}
     let map = []
     let lat = []
     let lon = []
@@ -167,9 +166,9 @@ export default function Items() {
     if (resp && resp.length!=0) {
         console.log(resp)
         paths = resp.paths
-        data_ = setLatlon(paths[0], mode, dLat, dLon, user_id)
-        console.log(data_)
-        latlon = data_.latlon
+        data = setLatlon(paths[0], mode, dLat, dLon, user_id)
+        console.log(data)
+        latlon = data.latlon
         lat = latlon.lat
         lon = latlon.lon
         if (mode == "foot") {

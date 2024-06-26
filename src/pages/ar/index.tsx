@@ -89,7 +89,7 @@ function decimalAdjust(type: string, value: unknown, exp: number) {
 }
 
 export default function ArPage() {
-  const { data }: any = useSession()
+  // const { data }: any = useSession()
   const [currlat, setCurrlat] = useState(Number);
   const [currlon, setCurrlon] = useState(Number);
   const [invrange, setInvrange] = useState(Number);
@@ -195,7 +195,7 @@ useEffect(()=> {
   async function getUser() {
     if(data){
         try {
-            const id = data.user._id
+            const id = user_id
             const response = await axios.post("/api/users/find", {id});
             if (response) {
                 setEmail (response.data.email)
@@ -219,7 +219,7 @@ useEffect(()=> {
     }
     else console.log("kosong")
 }getUser()
-}, [data, email, idrest, reslat, reslon])
+}, [user_id, email, idrest, reslat, reslon])
 // console.log(email)
 const onFinished = async () => {
   try {
