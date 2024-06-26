@@ -102,7 +102,7 @@ export default function ArPage() {
   const [resto, setResto] = useState()
   // console.log(data)
 
-  let get, latlon, resp, inv, sign, ins, mode, reslat: Number, reslon:Number, user_id
+  let get, latlon, resp, inv, sign, ins, mode, reslat: Number, reslon:Number, user_id = ''
   let lat,lon
 
   const seachParams = useSearchParams()
@@ -125,7 +125,7 @@ export default function ArPage() {
     mode = resp.mode
     reslat = resp.dLat
     reslon = resp.dLon
-    user_id = resp.user_id
+    user_id = String(resp.user_id)
   }
   else{
     latlon = {lat, lon}
@@ -193,7 +193,7 @@ export default function ArPage() {
 
 useEffect(()=> {
   async function getUser() {
-    if(data){
+    if(user_id != ''){
         try {
             const id = user_id
             const response = await axios.post("/api/users/find", {id});
@@ -219,7 +219,7 @@ useEffect(()=> {
     }
     else console.log("kosong")
 }getUser()
-}, [user_id, email, idrest, reslat, reslon])
+},[email, idrest, reslat, reslon, user_id])
 // console.log(email)
 const onFinished = async () => {
   try {
