@@ -233,11 +233,11 @@ const onFinished = async () => {
       if (response.status == 200 ){
         const mission = await axios.post("/api/mission", {id, idrest, email, week, month});
         const message = mission.data
-        if (mission.status == 200 ) router.push("/finish?message="+message+"&email="+email+"&level="+level);
+        if (mission.status == 200 ) router.push("https://siar-halal.vercel.app/finish?message="+message+"&email="+email+"&level="+level);
       }
     } 
     else if (hist.data == "ada"){
-      router.push("/dashboard");
+      router.push("https://siar-halal.vercel.app/dashboard");
     }
   } catch (error:any) {
       console.log(error.message);
