@@ -19,7 +19,7 @@ import { useEffect, useState } from 'react';
  
 export default function CardComp() {
   const { data }: any = useSession();
-  const user_id = data.user._id
+  const user_id = data?data.user._id:''
   const [resto, setResto] = useState([{
     _id:'',
     nama_resto:'',
