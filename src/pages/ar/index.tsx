@@ -285,7 +285,6 @@ if(dist < 20){
 </div>
 }
 
-
 if (invrange==null || invrange==undefined){
   setInvrange(0)
 }
@@ -309,22 +308,6 @@ if(dist_ins <= 15){
   </div>
 </div>
 }
-
-// let point, level
-
-// point = <div className=" card mt-4 bg-blue-gray-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-// <div className="card-body items-center text-center p-2">  
-//   <p className="break-words tracking-tight text-gray-100 dark:text-white">Points</p>
-//   <p className="break-words tracking-tight text-gray-100 dark:text-white">0</p>
-// </div>
-// </div>
-
-// level = <div className=" card mt-2 bg-blue-gray-800 opacity-80 border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-// <div className="card-body items-center text-center p-2">  
-//   <p className="break-words tracking-tight text-gray-100 dark:text-white">Level</p>
-//   <p className="break-words tracking-tight text-gray-100 dark:text-white">BASIC</p>
-// </div>
-// </div>
 
   nav.push(
     <a-entity gps-new-entity-place={"latitude:"+currlat+" ; longitude:"+currlon} position='15 0 0' id="nav" look-at={'#target'+idloc} gltf-model={'#panah'} animation-mixer='loop-repeat' scale={'0.1 0.1 0.1'}>
