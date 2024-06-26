@@ -13,7 +13,7 @@ export default function Dashboard() {
     const level = seachParams.get('level')
     const badge = seachParams.get('badge')
     const { data }: any = useSession();
-    const user_id = data.user._id
+    const user_id = data?data.user._id:''
     const [user, setUser] = useState(Object);
     const [info, setInfo] = useState(Object);
     const [mission, setMission] = useState(Object);
