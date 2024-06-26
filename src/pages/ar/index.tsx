@@ -102,7 +102,7 @@ export default function ArPage() {
   const [resto, setResto] = useState()
   // console.log(data)
 
-  let get, latlon, resp, inv, sign, ins, mode, reslat: Number, reslon:Number
+  let get, latlon, resp, inv, sign, ins, mode, reslat: Number, reslon:Number, user_id
   let lat,lon
 
   const seachParams = useSearchParams()
@@ -125,6 +125,7 @@ export default function ArPage() {
     mode = resp.mode
     reslat = resp.dLat
     reslon = resp.dLon
+    user_id = resp.user_id
   }
   else{
     latlon = {lat, lon}
@@ -223,7 +224,7 @@ useEffect(()=> {
 const onFinished = async () => {
   try {
     // const email_ = email
-    const id = data.user._id
+    const id = user_id
     const hist = await axios.post("/api/findhistory", {id, idrest, resto});
     // console.log(hist)
     if (hist.data == "kosong"){

@@ -1,6 +1,5 @@
 // @ts-nocheck
 import Image from "next/image";
-import AdminNavbar from "@/components/admnavbar";
 import Sidebar from "@/components/sidebar";
 import Map from "@/components/Map";
 import { useSearchParams } from 'next/navigation'
@@ -11,9 +10,10 @@ import { Typography } from "@material-tailwind/react";
 import { Card, CardBody } from "@material-tailwind/react";
 import { stringify } from "querystring";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 
 
-function setLatlon(data: {}, mode: any, dLat: any, dLon: any){
+function setLatlon(data: {}, mode: any, dLat: any, dLon: any, user_id:any){
     let latlon = {}, ins = {}
     let lat = []
     let lon = []
@@ -32,11 +32,12 @@ function setLatlon(data: {}, mode: any, dLat: any, dLon: any){
     localStorage.setItem("lon", JSON.stringify(lon)); 
     latlon = {lat, lon}
     ins = {inv, sign}
-    return {latlon, ins, mode, dLat, dLon}
+    return {latlon, ins, mode, dLat, dLon, user_id}
 }
 
 export default function Items() {
-    
+    const { data }: any = useSession()
+    const user_id = data.user._id
     const seachParams = useSearchParams()
     const dLat = seachParams.get('lat')
     const dLon = seachParams.get('lon')
@@ -158,7 +159,7 @@ export default function Items() {
 
     // console.log(resp)
 
-    let latlon = {}, data = {}
+    let latlon = {}, data_ = {}
     let map = []
     let lat = []
     let lon = []
@@ -166,9 +167,9 @@ export default function Items() {
     if (resp && resp.length!=0) {
         console.log(resp)
         paths = resp.paths
-        data = setLatlon(paths[0], mode, dLat, dLon)
-        console.log(data)
-        latlon = data.latlon
+        data_ = setLatlon(paths[0], mode, dLat, dLon, user_id)
+        console.log(data_)
+        latlon = data_.latlon
         lat = latlon.lat
         lon = latlon.lon
         if (mode == "foot") {
