@@ -33,7 +33,7 @@ export default function Dashboard() {
         isbadge.push(<>
             <Typography
             variant="h5"
-            className=" text-center mt-4 mb-4 ml-5 mr-5 w-full md:max-w-full lg:max-w-3xl text-blue-gray-700"
+            className=" text-center mt-2 mb-2 ml-5 mr-5 w-full md:max-w-full lg:max-w-3xl text-blue-gray-700"
             placeholder={""} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}        >
             Dan mendapatkan badge
             </Typography>
@@ -43,27 +43,27 @@ export default function Dashboard() {
         </>)
     }
     const modal = <div id="my_modal_1" className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center">
-        <div className="bg-white border-gray-200 rounded-lg shadow">
+        <div className="bg-white m-4 border-gray-200 rounded-lg shadow">
             <div className="relative grid place-items-center justify-center">
-            <Image className="mt-2 ml-8 mr-8" src="/image/uplevel.gif" alt="" width={300} height={300}></Image>
-            <Typography placeholder={""} variant="h3" color="blue-gray" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
-                Selamat!
-            </Typography>
-            <Typography
-                variant="h5"
-                className=" text-center mt-4 mb-4 ml-5 mr-5 w-full md:max-w-full lg:max-w-3xl text-blue-gray-700"
-                placeholder={""} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}        >
-                Anda naik ke
-            </Typography>
-            <Typography placeholder={""} variant="h3" color="blue-gray" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
-                Level {Number(level)}
-            </Typography>
-            {isbadge}
-            {/* <form method="dialog"> */}
-                <button onClick={()=>{setOpen(false)}} className=" mt-8 mb-8 relative text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                    OK
-                </button>
-            {/* </form> */}
+                <Image className="mt-2 ml-8 mr-8" src="/image/uplevel.gif" alt="" width={300} height={300}></Image>
+                <Typography placeholder={""} variant="h3" color="blue-gray" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                    Selamat!
+                </Typography>
+                <Typography
+                    variant="h5"
+                    className=" text-center mt-2 mb-2 ml-5 mr-5 w-full md:max-w-full lg:max-w-3xl text-blue-gray-700"
+                    placeholder={""} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}        >
+                    Anda naik ke
+                </Typography>
+                <Typography placeholder={""} variant="h3" color="blue-gray" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
+                    Level {Number(level)}
+                </Typography>
+                {isbadge}
+                {/* <form method="dialog"> */}
+                    <button onClick={()=>{setOpen(false)}} className=" mt-8 mb-8 relative text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                        OK
+                    </button>
+                {/* </form> */}
             </div>
         </div>
      </div>
