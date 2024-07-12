@@ -69,7 +69,7 @@ export default async function POST (req: NextApiRequest, res: NextApiResponse) {
             )
             return res.status(200).json({level:lvl+1, badge:"PRO"})
         }
-        else if (lvl==19){
+        else if (lvl==20){
           const levelup = await db
             .collection("user")
             .updateOne({email},

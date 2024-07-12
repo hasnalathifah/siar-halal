@@ -45,7 +45,7 @@ export default function Dashboard() {
     const modal = <div id="my_modal_1" className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center">
         <div className="bg-white border-gray-200 rounded-lg shadow">
             <div className="relative grid place-items-center justify-center">
-            <Image className="mt-2 ml-8 mr-8" src="/image/levelup.gif" alt="" width={300} height={300}></Image>
+            <Image className="mt-2 ml-8 mr-8" src="/image/uplevel.gif" alt="" width={300} height={300}></Image>
             <Typography placeholder={""} variant="h3" color="blue-gray" onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined}>
                 Selamat!
             </Typography>
