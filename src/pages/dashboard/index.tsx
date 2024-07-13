@@ -120,7 +120,7 @@ export default function Dashboard() {
     else if (info.badge=="PRO") {
         image = <Image className="object-cover rounded-full" src="/image/pro.png" alt="" width={40} height={40}/>
     }
-    else if (info.badge=="MAASTER") {
+    else if (info.badge=="MASTER") {
         image = <Image className="object-cover rounded-full" src="/image/master.png" alt="" width={40} height={40}/>
     }
     async function search() {
