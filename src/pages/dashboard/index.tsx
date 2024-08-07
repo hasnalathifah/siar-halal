@@ -82,21 +82,23 @@ export default function Dashboard() {
                         setInfo(response.data.gamification)
                         setMission(response.data.gamification.mission)
                         // console.log(yesterday+" "+mission.update)
-                        const arr = mission.update
-                        const upd = arr.split("/")
-                        const yes = yesterday.split("/")
-                        // console.log(upd[1]+" "+yes[1])
-                        if (mission.update && upd[2] < yes[2]){
-                            const email = user.email
-                            const reset = await axios.post("/api/resetmission", {email});
-                        }
-                        else if (mission.update && upd[1] < yes[1]){
-                            const email = user.email
-                            const reset = await axios.post("/api/resetmission", {email});
-                        }
-                        else if(mission.update && upd[0] < yes[0]){
-                            const email = user.email
-                            const reset = await axios.post("/api/resetmission", {email});
+                        if(mission.update){
+                            const arr = mission.update
+                            const upd = arr.split("/")
+                            const yes = yesterday.split("/")
+                            // console.log(upd[1]+" "+yes[1])
+                            if (mission.update && upd[2] < yes[2]){
+                                const email = user.email
+                                const reset = await axios.post("/api/resetmission", {email});
+                            }
+                            else if (mission.update && upd[1] < yes[1]){
+                                const email = user.email
+                                const reset = await axios.post("/api/resetmission", {email});
+                            }
+                            else if(mission.update && upd[0] < yes[0]){
+                                const email = user.email
+                                const reset = await axios.post("/api/resetmission", {email});
+                            }
                         }
                     }
                     else console.log("null")
